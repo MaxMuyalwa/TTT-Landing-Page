@@ -1,0 +1,6 @@
+{
+  "name": "Too Tall Toby CAD Community",
+  "description": "The global practice platform for engineers and CAD professionals to sharpen skills through challenges, leaderboard speed runs, and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

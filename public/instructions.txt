@@ -1,0 +1,21 @@
+INSTRUCTIONS FOR MAX
+===================
+
+Here is how to upload and configure your custom logos and favicon:
+
+1. THE FAVICON (for browser tabs):
+   - Save your favicon file as 'favicon.png'.
+   - Place/upload it in the '/public' folder of this project (so its path is '/public/favicon.png').
+   - The browser will immediately recognize and load your uploaded 'favicon.png' on tab headers, using '/favicon.svg' as a clean vector fallback in the meantime.
+
+2. THE NAV BAR LOGO (for the top corner):
+   - Save your horizontal logo image as 'logo.png'.
+   - Place/upload it in the '/public' folder of this project (so its path is '/public/logo.png').
+   - The application is configured to load '/logo.png' automatically. If the image is not found, it gracefully displays our beautiful hand-drawn blueprint fallback.
+
+3. THE HERO BACKGROUND IMAGE:
+   - Save your background image as 'hero-bg.jpg'.
+   - Place/upload it in the '/public/images' folder of this project (so its path is '/public/images/hero-bg.jpg').
+   - The hero section will load your image and fade it down beautifully into the deep dark theme background.
+
+Thank you! Let me know if you need any other refinements.

@@ -1,0 +1,477 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { 
+  Cpu, 
+  Trophy, 
+  BookOpen, 
+  Layers, 
+  Menu, 
+  X, 
+  ChevronDown, 
+  Glasses, 
+  User, 
+  Mail, 
+  LogIn, 
+  Check, 
+  Sparkles,
+  ArrowRight
+} from 'lucide-react';
+
+interface DropdownItem {
+  name: string;
+  href: string;
+  desc: string;
+}
+
+interface NavItem {
+  label: string;
+  href: string;
+  dropdownItems: DropdownItem[];
+}
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  
+  // Login form state
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
+  // Contact form state
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactMessage, setContactMessage] = useState('');
+  const [contactSuccess, setContactSuccess] = useState(false);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Custom logo state to load user-provided binary logo.png with fallback
+  const [logoSrc, setLogoSrc] = useState('/logo.png');
+  const [logoError, setLogoError] = useState(false);
+
+  const navItems: NavItem[] = [
+    {
+      label: 'Play & Learn',
+      href: '#challenges',
+      dropdownItems: [
+        { name: 'Practice Simulator', href: '#challenges', desc: 'Realtime CAD speed simulator' },
+        { name: 'Featured Challenges', href: '#challenges', desc: 'Dimensioned orthographic blueprints' },
+        { name: 'Speedrun Telemetry', href: '#analytics', desc: 'Performance benchmarks & plots' },
+      ]
+    },
+    {
+      label: 'Tournaments',
+      href: '#battles',
+      dropdownItems: [
+        { name: 'Live Esports Arena', href: '#battles', desc: 'Watch CAD masters battle head-to-head' },
+        { name: 'Global Speed Rankings', href: '#battles', desc: 'Top CAD speedrun leaderboards' },
+        { name: 'Register for Showdowns', href: '#register', desc: 'Join the next bracket and win prizes' },
+      ]
+    },
+    {
+      label: 'Resources',
+      href: '#tutorials',
+      dropdownItems: [
+        { name: 'Knowledge Node Network', href: '#tutorials', desc: 'Nonlinear educational CAD graph' },
+        { name: 'CAD-Agnostic Tutorials', href: '#tutorials', desc: 'Learn SolidWorks, Fusion 360, Onshape' },
+        { name: 'Community Telemetry', href: '#analytics', desc: 'System statistics & diagnostic instrumentation' },
+      ]
+    },
+    {
+      label: 'About Us',
+      href: '#analytics',
+      dropdownItems: [
+        { name: 'Who is Too Tall Toby?', href: '#register', desc: 'The global CAD competition creator' },
+        { name: 'Global Cohorts & Hubs', href: '#register', desc: 'Active countries and community maps' },
+        { name: 'Contact Engineering', href: '#register', desc: 'Submit bugs or suggest blueprints' },
+      ]
+    }
+  ];
+
+  const handleMouseEnter = (index: number) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(index);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (loginEmail) {
+      setLoginSuccess(true);
+      setTimeout(() => {
+        setIsLoginOpen(false);
+        setLoginSuccess(false);
+        setLoginEmail('');
+        setLoginPassword('');
+      }, 1800);
+    }
+  };
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (contactName && contactEmail && contactMessage) {
+      setContactSuccess(true);
+      setTimeout(() => {
+        setIsContactOpen(false);
+        setContactSuccess(false);
+        setContactName('');
+        setContactEmail('');
+        setContactMessage('');
+      }, 1800);
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+        
+        {/* Left: Beautiful authentic Logo */}
+        <div className="flex items-center gap-3">
+          {!logoError ? (
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.history.pushState(null, '', ' ');
+              }}
+              className="flex items-center gap-3 group"
+            >
+              <img 
+                src={logoSrc} 
+                onError={() => setLogoError(true)} 
+                alt="Too Tall Toby Logo" 
+                className="h-8 md:h-10 w-auto object-contain transition-transform duration-250 group-hover:scale-102" 
+              />
+            </a>
+          ) : (
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.history.pushState(null, '', ' ');
+              }}
+              className="flex items-center gap-3 group"
+            >
+              {/* Hand-drawn grid paper logo matching user's uploaded logo */}
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-[0_0_12px_rgba(255,255,255,0.45)] group-hover:scale-105 transition-transform duration-250">
+                <img src="/favicon.svg" alt="Too Tall Toby Logo" className="h-full w-full object-cover" />
+              </div>
+              <span className="font-sans font-black tracking-tighter text-white text-lg sm:text-xl uppercase transition-colors duration-200 group-hover:text-zinc-200">
+                TOO TALL TOBY
+              </span>
+            </a>
+          )}
+        </div>
+
+        {/* Center: Desktop Navigation with Chevrons and Dropdowns */}
+        <nav className="hidden lg:flex items-center gap-1">
+          {navItems.map((item, idx) => {
+            const isDropdownActive = activeDropdown === idx;
+            return (
+              <div 
+                key={item.label}
+                className="relative py-2 px-3"
+                onMouseEnter={() => handleMouseEnter(idx)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <a 
+                  href={item.href}
+                  className={`flex items-center gap-1 font-sans text-[13px] font-medium transition-colors cursor-pointer ${
+                    isDropdownActive ? 'text-white' : 'text-zinc-300 hover:text-white'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  <ChevronDown className={`h-3 w-3 text-zinc-500 transition-transform duration-200 ${
+                    isDropdownActive ? 'rotate-180 text-white' : ''
+                  }`} />
+                </a>
+
+                {/* Dropdown Card */}
+                {isDropdownActive && (
+                  <div 
+                    className="absolute top-full left-0 w-72 bg-black border border-white/15 rounded-lg shadow-2xl p-4 mt-1 z-50 animate-fade-in-quick"
+                    onMouseEnter={() => handleMouseEnter(idx)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="space-y-3">
+                      {item.dropdownItems.map((subItem) => (
+                        <a
+                          key={subItem.name}
+                          href={subItem.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="block p-2 rounded hover:bg-zinc-900 transition-colors group/sub"
+                        >
+                          <div className="font-sans text-xs font-semibold text-white group-hover/sub:text-brand-purple flex items-center justify-between">
+                            <span>{subItem.name}</span>
+                            <ArrowRight className="h-3 w-3 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all text-brand-purple" />
+                          </div>
+                          <div className="font-sans text-[10px] text-zinc-500 mt-0.5 leading-normal">
+                            {subItem.desc}
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </nav>
+
+        {/* Right: Actions exactly styled as Reference Image */}
+        <div className="hidden md:flex items-center gap-6">
+          {/* Contact Toby Text Link */}
+          <button 
+            onClick={() => setIsContactOpen(true)}
+            className="font-sans text-[13px] font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+          >
+            Contact Toby
+          </button>
+
+          {/* Login Text Link */}
+          <button 
+            onClick={() => setIsLoginOpen(true)}
+            className="font-sans text-[13px] font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+          >
+            Login
+          </button>
+
+          {/* Register Button: Rich dark purple container with neon purple border */}
+          <a 
+            href="#register" 
+            className="px-4 py-1.5 bg-[#14072b] hover:bg-[#200c42] border border-purple-600 rounded-md text-white font-sans text-xs font-semibold tracking-wide transition-all shadow-[0_0_15px_rgba(147,51,234,0.2)] hover:shadow-[0_0_20px_rgba(147,51,234,0.45)]"
+          >
+            Register
+          </a>
+        </div>
+
+        {/* Mobile menu button */}
+        <div className="flex lg:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="inline-flex items-center justify-center rounded-md p-1.5 text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {isOpen && (
+        <div className="lg:hidden border-t border-white/10 bg-black px-4 py-6 space-y-4 shadow-xl">
+          <div className="space-y-4">
+            {navItems.map((item) => (
+              <div key={item.label} className="space-y-1">
+                <div className="font-sans text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">
+                  {item.label}
+                </div>
+                <div className="space-y-1 pl-2">
+                  {item.dropdownItems.map((subItem) => (
+                    <a
+                      key={subItem.name}
+                      href={subItem.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block p-2 rounded text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors text-xs font-medium"
+                    >
+                      {subItem.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+            <button 
+              onClick={() => {
+                setIsOpen(false);
+                setIsContactOpen(true);
+              }}
+              className="w-full text-center py-2 border border-white/10 hover:border-white/20 rounded text-zinc-300 hover:text-white text-xs font-semibold"
+            >
+              Contact Toby
+            </button>
+            <button 
+              onClick={() => {
+                setIsOpen(false);
+                setIsLoginOpen(true);
+              }}
+              className="w-full text-center py-2 border border-white/10 hover:border-white/20 rounded text-zinc-300 hover:text-white text-xs font-semibold"
+            >
+              Login
+            </button>
+            <a
+              href="#register"
+              onClick={() => setIsOpen(false)}
+              className="w-full text-center py-2.5 bg-purple-900 border border-purple-500 rounded text-white text-xs font-bold shadow-lg"
+            >
+              Register
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* -------------------- LOGIN MODAL -------------------- */}
+      {isLoginOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsLoginOpen(false)} />
+          
+          <div className="relative w-full max-w-md bg-black border border-white/20 rounded-lg p-6 shadow-2xl overflow-hidden animate-fade-in">
+            {/* Tech line accents */}
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-purple via-brand-green to-brand-purple" />
+            <div className="absolute bottom-2 left-2 font-mono text-[8px] text-zinc-700 select-none">SYS: CAD_GATEWAY_V1.0</div>
+            
+            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6">
+              <div className="flex items-center gap-2">
+                <LogIn className="h-4.5 w-4.5 text-brand-purple" />
+                <span className="font-mono text-xs text-white font-bold uppercase tracking-widest">// User Authentication</span>
+              </div>
+              <button 
+                onClick={() => setIsLoginOpen(false)} 
+                className="text-zinc-400 hover:text-white transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {loginSuccess ? (
+              <div className="py-8 text-center space-y-4">
+                <div className="h-12 w-12 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto">
+                  <Check className="h-6 w-6 animate-pulse" />
+                </div>
+                <h3 className="font-display font-bold text-white text-base">Authentication Successful</h3>
+                <p className="font-mono text-[10px] text-zinc-500">Redirecting to CAD telemetry dashboard...</p>
+              </div>
+            ) : (
+              <form onSubmit={handleLoginSubmit} className="space-y-4 text-left">
+                <div className="space-y-1.5">
+                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Engineering Email</label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
+                    <input 
+                      type="email" 
+                      required
+                      placeholder="name@company.com"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                      className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-purple rounded px-3 py-2 pl-9 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Security Keycode</label>
+                  <input 
+                    type="password" 
+                    required
+                    placeholder="••••••••"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-purple rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full py-2.5 mt-2 bg-[#14072b] hover:bg-[#200c42] border border-purple-600 hover:border-purple-500 rounded text-white font-mono text-xs font-bold uppercase tracking-widest transition-all"
+                >
+                  Authorize_Session
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* -------------------- CONTACT TOBY MODAL -------------------- */}
+      {isContactOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsContactOpen(false)} />
+          
+          <div className="relative w-full max-w-md bg-black border border-white/20 rounded-lg p-6 shadow-2xl overflow-hidden animate-fade-in">
+            {/* Tech line accents */}
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-green via-brand-purple to-brand-green" />
+            <div className="absolute bottom-2 left-2 font-mono text-[8px] text-zinc-700 select-none">SYS: TOBY_INBOX_ONLINE</div>
+            
+            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6">
+              <div className="flex items-center gap-2">
+                <Mail className="h-4.5 w-4.5 text-brand-green" />
+                <span className="font-mono text-xs text-white font-bold uppercase tracking-widest">// Contact Toby Schnaars</span>
+              </div>
+              <button 
+                onClick={() => setIsContactOpen(false)} 
+                className="text-zinc-400 hover:text-white transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {contactSuccess ? (
+              <div className="py-8 text-center space-y-4">
+                <div className="h-12 w-12 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto">
+                  <Check className="h-6 w-6 animate-pulse" />
+                </div>
+                <h3 className="font-display font-bold text-white text-base">Transmission Sent</h3>
+                <p className="font-mono text-[10px] text-zinc-500">Toby and the engineering crew will respond shortly.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleContactSubmit} className="space-y-4 text-left">
+                <div className="space-y-1.5">
+                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Your Name</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="Engineer Name"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Email Address</label>
+                  <input 
+                    type="email" 
+                    required
+                    placeholder="name@company.com"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Transmission Details</label>
+                  <textarea 
+                    required
+                    rows={4}
+                    placeholder="Suggest a challenge, report a speedrun score, or inquire about custom team tournaments..."
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full py-2.5 mt-2 bg-[#092b15] hover:bg-[#0e4221] border border-green-600 hover:border-green-500 rounded text-white font-mono text-xs font-bold uppercase tracking-widest transition-all"
+                >
+                  Send_Transmission
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

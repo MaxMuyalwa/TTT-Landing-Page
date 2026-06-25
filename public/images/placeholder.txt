@@ -1,0 +1,2 @@
+Please replace the 'hero-bg.jpg' image in this directory with your own above-the-fold full background image.
+The application is configured to look for '/images/hero-bg.jpg' and will use it automatically.
