@@ -28,7 +28,7 @@ export default function Tutorials() {
   };
 
   return (
-    <section id="tutorials" className="relative overflow-hidden bg-zinc-950 py-16 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
+    <section id="tutorials" className="relative overflow-hidden bg-zinc-950/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
       <div className="absolute inset-0 engineering-grid-fine opacity-20 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">

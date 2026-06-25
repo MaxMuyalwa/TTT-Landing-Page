@@ -14,7 +14,7 @@ export default function FinalCta() {
   };
 
   return (
-    <section id="register" className="relative overflow-hidden bg-black py-20 px-4 sm:px-6 lg:px-8 border-b border-white/20">
+    <section id="register" className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-20 px-4 sm:px-6 lg:px-8 border-b border-white/20">
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       
       <div className="relative mx-auto max-w-5xl rounded-lg border border-white/20 bg-black p-8 md:p-12 text-center backdrop-blur-sm overflow-hidden">

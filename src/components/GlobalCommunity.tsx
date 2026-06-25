@@ -8,7 +8,7 @@ export default function GlobalCommunity() {
   // Abstracted SVG layout for continents so it looks like an engineering wireframe map!
   // We'll render dots and high-tech connection lines.
   return (
-    <section className="relative overflow-hidden bg-black py-16 px-4 sm:px-6 lg:px-8 border-b border-white/20">
+    <section className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8 border-b border-white/20">
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">

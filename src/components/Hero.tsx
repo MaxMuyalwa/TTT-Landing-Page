@@ -6,10 +6,10 @@ export default function Hero() {
   const [bgSrc, setBgSrc] = useState('/images/hero-bg.jpg');
 
   return (
-    <section className="relative overflow-hidden bg-black pt-10 pb-16 md:pt-12 md:pb-20 border-b border-white/10">
+    <section className="relative overflow-hidden bg-transparent pt-10 pb-16 md:pt-12 md:pb-20 border-b border-white/10">
       
       {/* Above-the-fold Full Background Video with Bottom Fade to Solid Black */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
+      <div className="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {/* Background Video */}
         <video
           autoPlay

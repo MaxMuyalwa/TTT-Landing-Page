@@ -73,7 +73,7 @@ export default function Metrics() {
   ];
 
   return (
-    <section className="relative bg-black border-b border-white/20 py-12 px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-black/40 backdrop-blur-[2px] border-b border-white/20 py-12 px-4 sm:px-6 lg:px-8">
       {/* Blueprint Grid Accent */}
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       
