@@ -14,8 +14,27 @@ import Footer from './components/Footer';
 
 export default function App() {
   useEffect(() => {
-    // Reset window scroll to top instantly on application mount
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Force browser to handle scroll restoration manually
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    
+    // Reset scroll to top instantly
+    window.scrollTo(0, 0);
+
+    // Apply additional scroll resets to handle lazy-loaded elements and video layout shifts
+    const timer1 = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+
+    const timer2 = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 200);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   return (

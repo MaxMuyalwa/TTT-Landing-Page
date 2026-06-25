@@ -6,7 +6,7 @@ export default function Hero() {
   const [bgSrc, setBgSrc] = useState('/images/hero-bg.jpg');
 
   return (
-    <section className="relative overflow-hidden bg-black pt-16 pb-24 md:pt-24 md:pb-32 border-b border-white/10">
+    <section className="relative overflow-hidden bg-black pt-10 pb-16 md:pt-12 md:pb-20 border-b border-white/10">
       
       {/* Above-the-fold Full Background Video with Bottom Fade to Solid Black */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
@@ -59,12 +59,12 @@ export default function Hero() {
         </div>
 
         {/* Subtitle description */}
-        <p className="mt-6 text-sm sm:text-base text-zinc-400 font-sans tracking-wide max-w-2xl mx-auto">
+        <p className="mt-4 text-sm sm:text-base text-zinc-400 font-sans tracking-wide max-w-2xl mx-auto">
           Sharpen your CAD skills using ANY 3D CAD platform.
         </p>
 
         {/* Centered Pill Buttons */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#challenges"
             className="px-8 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-all font-sans text-xs font-bold uppercase tracking-wider shadow-[0_4px_12px_rgba(255,255,255,0.15)] flex items-center gap-2"
@@ -80,7 +80,7 @@ export default function Hero() {
         </div>
 
         {/* Practice Modeling Container exactly styled as the centered box in the image */}
-        <div className="mt-16 mx-auto max-w-5xl bg-zinc-950/90 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md relative overflow-hidden">
+        <div className="mt-10 md:mt-12 mx-auto max-w-5xl bg-zinc-950/90 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md relative overflow-hidden">
           {/* Subtle top edge glow */}
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
           
