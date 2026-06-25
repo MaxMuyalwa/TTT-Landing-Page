@@ -163,7 +163,38 @@ export default function Navbar() {
             >
               {/* Hand-drawn grid paper logo matching user's uploaded logo */}
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-[0_0_12px_rgba(255,255,255,0.45)] group-hover:scale-105 transition-transform duration-250">
-                <img src="/favicon.svg" alt="Too Tall Toby Logo" className="h-full w-full object-cover" />
+                <svg viewBox="0 0 100 100" className="h-full w-full">
+                  {/* Outer circle with border */}
+                  <circle cx="50" cy="50" r="47" fill="#f5f7ff" stroke="#000000" strokeWidth="4"/>
+                  
+                  {/* Light lavender/blue grid background inside the circle */}
+                  <g mask="url(#circle-mask-inline)">
+                    <mask id="circle-mask-inline">
+                      <circle cx="50" cy="50" r="45" fill="white"/>
+                    </mask>
+                    {/* Grid lines */}
+                    <path d="M 10,0 L 10,100 M 20,0 L 20,100 M 30,0 L 30,100 M 40,0 L 40,100 M 50,0 L 50,100 M 60,0 L 60,100 M 70,0 L 70,100 M 80,0 L 80,100 M 90,0 L 90,100" stroke="#d5deff" strokeWidth="1.25" />
+                    <path d="M 0,10 L 100,10 M 0,20 L 100,20 M 0,30 L 100,30 M 0,40 L 100,40 M 0,50 L 100,50 M 0,60 L 100,60 M 0,70 L 100,70 M 0,80 L 100,80 M 0,90 L 100,90" stroke="#d5deff" strokeWidth="1.25" />
+                    
+                    {/* Cartoon face/outline contour (Toby's head outline) */}
+                    <path d="M 22,50 C 20,24 80,24 78,50 C 76,73 24,73 22,50" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round"/>
+                    
+                    {/* Spectacles glasses (Thick black rims, rounded square design) */}
+                    <rect x="28" y="38" width="18" height="18" rx="4" fill="none" stroke="#000000" strokeWidth="4.5" strokeLinejoin="round" />
+                    <rect x="54" y="38" width="18" height="18" rx="4" fill="none" stroke="#000000" strokeWidth="4.5" strokeLinejoin="round" />
+                    
+                    {/* Spectacles Bridge */}
+                    <path d="M 46,47 Q 50,44 54,47" fill="none" stroke="#000000" strokeWidth="4.5" strokeLinecap="round"/>
+                    
+                    {/* Spectacles Temples/Arms (extending outwards) */}
+                    <path d="M 28,47 C 22,45 18,38 16,44" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                    <path d="M 72,47 C 78,45 82,38 84,44" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                    
+                    {/* Little hand-drawn details (Toby hair tuft/ear markings) */}
+                    <path d="M 18,52 L 15,58" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 82,52 L 85,58" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" />
+                  </g>
+                </svg>
               </div>
               <span className="font-sans font-black tracking-tighter text-white text-lg sm:text-xl uppercase transition-colors duration-200 group-hover:text-zinc-200">
                 TOO TALL TOBY

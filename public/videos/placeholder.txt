@@ -1,0 +1,5 @@
+Please replace this directory's contents with your own background video file.
+Save your video as 'hero-video.mp4' in this folder (so its path is '/videos/hero-video.mp4').
+
+The application is configured to look for '/videos/hero-video.mp4' first. If it finds it, it will play it automatically in a seamless loop with muted audio, optimized for high performance.
+In the meantime, we have configured a beautiful high-tech dark abstract loop video and a high-quality static CAD image fallback so that your site always looks pristine and functional!

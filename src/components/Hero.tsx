@@ -8,23 +8,36 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-black pt-16 pb-24 md:pt-24 md:pb-32 border-b border-white/10">
       
-      {/* Above-the-fold Full Background Image with Bottom Fade to Solid Black */}
+      {/* Above-the-fold Full Background Video with Bottom Fade to Solid Black */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
-        {/* Background Image */}
-        <img
-          src={bgSrc}
-          onError={() => {
-            // If the user's custom image is not found, use a beautiful, high-quality, dark CAD/3D/geometry-inspired abstract tech background as an elegant fallback.
-            if (bgSrc !== 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop') {
-              setBgSrc('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
-            }
-          }}
-          alt="CAD Background"
-          className="w-full h-full object-cover opacity-35 md:opacity-50 transition-opacity duration-1000"
-          referrerPolicy="no-referrer"
-        />
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-25 md:opacity-40 transition-opacity duration-1000"
+        >
+          {/* User's local custom background video path */}
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
+          {/* Premium high-quality dark abstract tech loop as an elegant, fast loading default fallback */}
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-laser-lights-background-31742-large.mp4" type="video/mp4" />
+          {/* Static image fallback if video plays are blocked/unsupported (e.g. mobile low-power modes) */}
+          <img
+            src={bgSrc}
+            onError={() => {
+              // If the user's custom image is not found, use a beautiful, high-quality, dark CAD/3D/geometry-inspired abstract tech background as an elegant fallback.
+              if (bgSrc !== 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop') {
+                setBgSrc('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
+              }
+            }}
+            alt="CAD Background Fallback"
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+        </video>
         
-        {/* Vertical Masking Gradients - Ensures the image fades perfectly down into the black page background */}
+        {/* Vertical Masking Gradients - Ensures the video/image fades perfectly down into the black page background */}
         {/* Radial center highlight overlay to mimic the focus of the content */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.15),transparent_70%)]" />
 
