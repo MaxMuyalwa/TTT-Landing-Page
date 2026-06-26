@@ -93,6 +93,7 @@ const sponsorsData = [
 const pastPartners = [
   { name: 'Fuse', logo: '/images/sponsors/fuse.png' },
   { name: 'Alibre', logo: '/images/sponsors/alibre.png' },
+  { name: 'Onshape', logo: '/images/sponsors/onshape.png' },
   { name: 'JIT CAD CAM', logo: '/images/sponsors/jit-cad-cam.png' },
   { name: 'Prusa Research', logo: '/images/sponsors/prusa-research.png' },
 ];
