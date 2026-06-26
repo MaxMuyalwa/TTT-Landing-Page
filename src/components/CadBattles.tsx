@@ -98,17 +98,19 @@ export default function CadBattles() {
                       <div
                         key={idx}
                         onClick={() => setActiveBracketIdx(idx)}
-                        className={`cursor-pointer rounded border p-3 flex flex-col justify-between transition-all ${
+                        className={`cursor-pointer rounded border p-3 flex flex-col justify-between transition-all group ${
                           isSelected 
-                            ? 'bg-zinc-900 border-brand-purple shadow-[0_0_8px_rgba(147,51,234,0.15)]' 
-                            : 'bg-black border-white/10 text-zinc-400 hover:border-white/30'
+                            ? 'bg-zinc-900 border-brand-purple shadow-[0_0_8px_rgba(147,51,234,0.15)] scale-[1.01]' 
+                            : 'bg-black border-white/10 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-950/40'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                           <span className="text-zinc-500 font-bold">MATCH_0{idx + 1}</span>
-                          {isSelected && <span className="text-brand-purple font-bold text-[8px] animate-pulse">SELECTED</span>}
+                           <span className="text-zinc-500 font-bold group-hover:text-zinc-400">MATCH_0{idx + 1}</span>
+                          <span className={`font-mono text-[8px] font-bold transition-all duration-200 ${isSelected ? 'text-brand-purple animate-pulse' : 'text-zinc-600 group-hover:text-brand-green'}`}>
+                            {isSelected ? 'SELECTED_MATCH' : 'CHOOSE_MATCH'}
+                          </span>
                         </div>
-                        <span className="text-white font-semibold">{match}</span>
+                        <span className="text-white font-semibold transition-colors group-hover:text-zinc-100">{match}</span>
                       </div>
                     );
                   })}
@@ -156,12 +158,12 @@ export default function CadBattles() {
                 {LEADERBOARD_DATA.slice(0, 5).map((player) => (
                   <div
                     key={player.rank}
-                    className="flex items-center justify-between bg-black border border-white/5 p-2.5 rounded hover:border-white/20 transition-colors"
+                    className="flex items-center justify-between bg-black border border-white/5 p-2.5 rounded hover:border-brand-purple/35 hover:bg-zinc-950/60 transition-all cursor-pointer group"
                   >
                     <div className="flex items-center gap-3">
                       {/* Rank badge */}
-                      <span className={`inline-flex h-5 w-5 items-center justify-center rounded font-mono text-[9px] font-bold ${
-                        player.rank === 1 ? 'bg-zinc-100 text-black' :
+                      <span className={`inline-flex h-5 w-5 items-center justify-center rounded font-mono text-[9px] font-bold transition-all duration-300 group-hover:scale-105 ${
+                        player.rank === 1 ? 'bg-zinc-100 text-black shadow-[0_0_8px_rgba(255,255,255,0.2)]' :
                         player.rank === 2 ? 'bg-zinc-800 text-brand-purple-light border border-white/10' :
                         player.rank === 3 ? 'bg-zinc-800 text-brand-green-light border border-white/10' :
                         'bg-zinc-900 text-zinc-500'
@@ -171,17 +173,17 @@ export default function CadBattles() {
                       
                       {/* Competitor identity */}
                       <div>
-                        <div className="font-sans font-bold text-zinc-200 text-xs">{player.username}</div>
-                        <div className="font-mono text-[8px] text-zinc-600 mt-0.5">{player.cadPlatform} // {player.country}</div>
+                        <div className="font-sans font-bold text-zinc-200 text-xs group-hover:text-white transition-colors">{player.username}</div>
+                        <div className="font-mono text-[8px] text-zinc-600 mt-0.5 group-hover:text-zinc-500 transition-colors">{player.cadPlatform} // {player.country}</div>
                       </div>
                     </div>
 
                     {/* Millisecond Speed timing */}
                     <div className="text-right">
-                      <div className="font-mono text-xs font-bold text-brand-green terminal-glow-green">
+                      <div className="font-mono text-xs font-bold text-brand-green terminal-glow-green group-hover:text-brand-green-light transition-colors group-hover:scale-102">
                         {player.time}
                       </div>
-                      <div className="font-mono text-[8px] text-zinc-500 uppercase mt-0.5">
+                      <div className="font-mono text-[8px] text-zinc-500 uppercase mt-0.5 group-hover:text-zinc-400 transition-colors">
                         {player.streakDays}D STREAK
                       </div>
                     </div>

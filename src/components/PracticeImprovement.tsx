@@ -44,6 +44,46 @@ export default function PracticeImprovement() {
       <div className="absolute inset-0 engineering-grid opacity-10 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">
+
+        {/* Practice -> Improvement Story Journey Header */}
+        <div className="mb-12 max-w-4xl mx-auto text-center border border-white/5 bg-zinc-950/70 p-6 rounded-xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-purple/5 to-transparent animate-pulse pointer-events-none" />
+          <span className="font-mono text-[9px] text-brand-purple font-bold uppercase tracking-widest block mb-2">// THE PROFESSIONAL GROWTH ENGINE</span>
+          <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight">The 5-Stage Parametric Cycle</h3>
+          <p className="text-zinc-400 text-xs mt-1 font-sans max-w-2xl mx-auto">Structured, data-driven repetition builds pure parametric mechanical reflexes across every CAD platform.</p>
+          
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-1 relative">
+            {/* Background connecting laser line */}
+            <div className="absolute top-4 left-4 right-4 h-0.5 bg-zinc-900 z-0 hidden sm:block" />
+            
+            {[
+              { label: "PRACTICE", desc: "Select a geometry", sub: "Blueprint Challenge", color: "border-brand-purple/30 text-zinc-400" },
+              { label: "MEASURE", desc: "Clock your speed run", sub: "Mass Verification", color: "border-brand-purple/30 text-zinc-400" },
+              { label: "IMPROVE", desc: "Build muscle memory", sub: "Command Redundancy", color: "border-brand-purple text-brand-purple-light" },
+              { label: "COMPETE", desc: "Go head-to-head live", sub: "Leaderboard Arenas", color: "border-brand-green/50 text-brand-green" },
+              { label: "MASTER", desc: "Become an elite expert", sub: "CAD-Agnostic Fluidity", color: "border-white/20 text-white" }
+            ].map((step, idx) => (
+              <div key={idx} className="relative z-10 flex flex-col items-center group cursor-pointer">
+                {/* Node counter */}
+                <div className={`h-8 w-8 rounded-full bg-black border ${step.color} flex items-center justify-center font-mono text-[10px] font-bold group-hover:scale-110 transition-all shadow-[0_0_12px_rgba(0,0,0,0.8)]`}>
+                  0{idx + 1}
+                </div>
+                {/* Stage title */}
+                <span className="font-display text-[10px] sm:text-xs font-extrabold text-white mt-3 uppercase tracking-wider group-hover:text-brand-purple transition-colors">
+                  {step.label}
+                </span>
+                {/* Stage description */}
+                <span className="font-sans text-[9px] text-zinc-500 mt-0.5 leading-tight hidden sm:block">
+                  {step.desc}
+                </span>
+                <span className="font-mono text-[7px] text-zinc-600 mt-0.5 uppercase hidden md:block">
+                  // {step.sub}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           
           {/* Left Side: Simulation Graph plotting curves (7 cols) */}
@@ -168,11 +208,16 @@ export default function PracticeImprovement() {
             </div>
 
             {/* Control Dashboard */}
-            <div className="bg-[#060608] border border-zinc-800 p-5 rounded-lg space-y-6">
+            <div className="bg-[#060608] border border-zinc-850 p-5 rounded-lg space-y-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 font-mono text-[7px] text-zinc-700 bg-zinc-900 border-l border-b border-zinc-800 px-1.5 py-0.5 uppercase">SOLVER_ENGINE_V2</div>
+
               {/* Slider 1: Baseline Minutes */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-sans text-xs font-semibold text-zinc-300">Your Initial Baseline Modeling Speed</span>
+                  <div className="space-y-0.5">
+                    <span className="font-mono text-[8px] text-brand-purple font-bold block uppercase tracking-widest">// STAGE_01: CURRENT_SKILL_LEVEL</span>
+                    <span className="font-sans text-xs font-semibold text-zinc-300">Initial Baseline Modeling Speed</span>
+                  </div>
                   <span className="font-mono text-xs text-white bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
                     {baselineMinutes} Minutes
                   </span>
@@ -194,7 +239,10 @@ export default function PracticeImprovement() {
               {/* Slider 2: Practice Frequency */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-sans text-xs font-semibold text-zinc-300">Practice Commited per Week</span>
+                  <div className="space-y-0.5">
+                    <span className="font-mono text-[8px] text-brand-green font-bold block uppercase tracking-widest">// STAGE_02: PRACTICE_FREQUENCY</span>
+                    <span className="font-sans text-xs font-semibold text-zinc-300">Practice Committed per Week</span>
+                  </div>
                   <span className="font-mono text-xs text-brand-green bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
                     {practiceHours} Hours/Wk
                   </span>
@@ -215,6 +263,7 @@ export default function PracticeImprovement() {
 
               {/* Simulation Result readout */}
               <div className="border-t border-zinc-900 pt-4 text-center">
+                <span className="font-mono text-[8px] text-brand-green font-bold block uppercase tracking-widest mb-1">// STAGE_03: ESTIMATED_FUTURE_PERFORMANCE</span>
                 <div className="font-mono text-[9px] text-zinc-500 uppercase">PROJECTED_12_MONTH_SPEED_RUN</div>
                 <div className="font-display text-4xl font-extrabold text-white mt-1">
                   {simulatedSpeeds[simulatedSpeeds.length - 1].speed} <span className="text-sm font-normal text-zinc-500">Mins</span>

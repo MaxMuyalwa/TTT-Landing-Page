@@ -95,10 +95,10 @@ export default function GlobalCommunity() {
                     <button
                       key={country.code}
                       onClick={() => setActiveCountry(country)}
-                      className={`font-mono text-[10px] px-2 py-1 rounded border transition-all ${
+                      className={`font-mono text-[10px] px-2 py-1 rounded border transition-all cursor-pointer ${
                         isSelected 
-                          ? 'border-brand-green bg-zinc-950 text-brand-green shadow-[0_0_8px_rgba(34,197,94,0.15)]' 
-                          : 'border-zinc-900 bg-zinc-950/20 text-zinc-500 hover:border-zinc-800'
+                          ? 'border-brand-green bg-zinc-950 text-brand-green shadow-[0_0_8px_rgba(34,197,94,0.15)] scale-[1.02]' 
+                          : 'border-zinc-900 bg-zinc-950/20 text-zinc-500 hover:border-zinc-800 hover:text-zinc-300'
                       }`}
                     >
                       {country.country}

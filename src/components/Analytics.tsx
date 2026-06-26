@@ -5,6 +5,7 @@ import { Cpu, TrendingDown, Calendar, CheckSquare, RefreshCw, BarChart2, Info } 
 export default function Analytics() {
   const [selectedPlatform, setSelectedPlatform] = useState(CAD_PLATFORMS[0]);
   const [selectedTrendIndex, setSelectedTrendIndex] = useState(PRACTICE_IMPROVEMENT_DATA.length - 1);
+  const [hoveredHeatmapIdx, setHoveredHeatmapIdx] = useState<number | null>(null);
 
   // Generate a mock grid of 53 weeks x 7 days for the heatmap
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -115,10 +116,10 @@ export default function Analytics() {
                     <button
                       key={platform.id}
                       onClick={() => setSelectedPlatform(platform)}
-                      className={`flex items-center gap-1.5 p-1.5 rounded border text-left transition-all ${
+                      className={`flex items-center gap-1.5 p-1.5 rounded border text-left transition-all cursor-pointer group/btn ${
                         isSelected 
-                          ? 'bg-zinc-950 border-brand-purple text-white shadow-[0_0_8px_rgba(147,51,234,0.15)]' 
-                          : 'bg-zinc-950/20 border-white/5 text-zinc-500 hover:border-white/20'
+                          ? 'bg-zinc-950 border-brand-purple text-white shadow-[0_0_8px_rgba(147,51,234,0.15)] scale-[1.02]' 
+                          : 'bg-zinc-950/20 border-white/5 text-zinc-500 hover:border-zinc-800 hover:text-zinc-300'
                       }`}
                     >
                       <span className="h-2 w-2 rounded-full" style={{ backgroundColor: platform.color }} />
@@ -168,9 +169,14 @@ export default function Analytics() {
                 <span className="font-mono text-[9px] text-brand-green font-bold">METRIC: AVG_TIME_MINS</span>
               </div>
 
-              <div className="font-sans text-[11px] text-zinc-400 mb-6 flex items-center gap-1.5">
-                <Info className="h-3 w-3 text-brand-purple" />
-                <span>Times decrease dramatically as muscle memory and parametric habits build.</span>
+              <div className="font-sans text-[11px] text-zinc-400 mb-4 flex flex-wrap items-center justify-between gap-1.5">
+                <div className="flex items-center gap-1.5">
+                  <Info className="h-3 w-3 text-brand-purple" />
+                  <span>Times decrease as muscle memory builds.</span>
+                </div>
+                <span className="font-mono text-[8px] text-brand-green uppercase animate-pulse font-bold tracking-wider bg-brand-green/10 px-1.5 py-0.5 rounded border border-brand-green/20">
+                  ● Click Nodes To Filter
+                </span>
               </div>
 
               {/* Custom SVG Line Chart plotting times */}
@@ -193,6 +199,43 @@ export default function Analytics() {
                   <text x="12" y="84" className="font-mono text-[7px] fill-zinc-600" textAnchor="end">10m</text>
                   <text x="12" y="119" className="font-mono text-[7px] fill-zinc-600" textAnchor="end">5m</text>
                   <text x="12" y="152" className="font-mono text-[7px] fill-zinc-600" textAnchor="end">0m</text>
+
+                  {/* Community Average Curve (Dashed Zinc Line) */}
+                  <path
+                    d={`M 20 ${150 - (19.5 / 20) * 140} 
+                        L 80 ${150 - (16.2 / 20) * 140} 
+                        L 140 ${150 - (12.0 / 20) * 140} 
+                        L 200 ${150 - (9.1 / 20) * 140} 
+                        L 260 ${150 - (6.8 / 20) * 140} 
+                        L 320 ${150 - (5.0 / 20) * 140} 
+                        L 380 ${150 - (3.8 / 20) * 140}`}
+                    fill="none"
+                    stroke="#52525b"
+                    strokeWidth="1.5"
+                    strokeDasharray="3 3"
+                    strokeLinecap="round"
+                    opacity="0.75"
+                  />
+
+                  {/* Elite Limit Benchmark Line */}
+                  <line 
+                    x1="20" 
+                    y1={150 - (2.0 / 20) * 140} 
+                    x2="380" 
+                    y2={150 - (2.0 / 20) * 140} 
+                    stroke="#9333ea" 
+                    strokeWidth="1" 
+                    strokeDasharray="1 3" 
+                    opacity="0.65"
+                  />
+                  <text 
+                    x="378" 
+                    y={150 - (2.0 / 20) * 140 - 4} 
+                    className="font-mono text-[5.5px] fill-brand-purple-light text-right" 
+                    textAnchor="end"
+                  >
+                    ELITE LIMIT BENCHMARK: 02:00m
+                  </text>
 
                   {/* Draw curve paths */}
                   {/* Mapping points: week 1->20, week 2->80, week 4->140, week 8->200, week 12->260, week 24->320, week 52->380 */}
@@ -245,21 +288,46 @@ export default function Analytics() {
                   ].map((node, index) => {
                     const isSelected = selectedTrendIndex === index;
                     return (
-                      <g key={index} className="cursor-pointer" onClick={() => setSelectedTrendIndex(index)}>
+                      <g key={index} className="cursor-pointer group/node" onClick={() => setSelectedTrendIndex(index)}>
+                        {isSelected && (
+                          <circle
+                            cx={node.x}
+                            cy={node.y}
+                            r="10"
+                            className="fill-none stroke-brand-purple/40 animate-ping"
+                          />
+                        )}
                         <circle
                           cx={node.x}
                           cy={node.y}
-                          r={isSelected ? 6 : 4}
+                          r={isSelected ? 6 : 4.5}
                           fill={isSelected ? '#9333ea' : '#22c55e'}
+                          className="transition-all duration-200 group-hover/node:fill-brand-purple-light group-hover/node:r-[6.5px]"
                           stroke="#000"
                           strokeWidth="1.5"
                         />
                         {/* Label on top */}
-                        <text x={node.x} y="160" className="font-mono text-[7px] fill-zinc-500" textAnchor="middle">{node.label}</text>
+                        <text x={node.x} y="160" className={`font-mono text-[7px] transition-colors ${isSelected ? 'fill-brand-purple font-bold' : 'fill-zinc-500 group-hover/node:fill-zinc-300'}`} textAnchor="middle">{node.label}</text>
                       </g>
                     );
                   })}
                 </svg>
+              </div>
+
+              {/* Chart Legend */}
+              <div className="flex items-center justify-center gap-4 mt-2 pb-2 font-mono text-[7.5px] text-zinc-500 border-b border-white/5">
+                <div className="flex items-center gap-1">
+                  <span className="h-1 w-3 bg-[#22c55e] rounded" />
+                  <span>Your Curve</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="h-0.5 w-3 border-t border-dashed border-zinc-500" />
+                  <span>Global Avg</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="h-0.5 w-3 border-t border-dotted border-brand-purple" />
+                  <span>Elite Benchmark</span>
+                </div>
               </div>
             </div>
 
@@ -301,22 +369,52 @@ export default function Analytics() {
               </div>
 
               {/* Grid representation of heatmap */}
-              <div className="grid grid-cols-12 gap-[3px] p-2 bg-black rounded border border-white/5">
+              <div className="grid grid-cols-12 gap-[3px] p-2 bg-black rounded border border-white/5 relative group/heatmap">
                 {heatmapData.map((level, idx) => {
                   let colorClass = 'bg-zinc-950';
-                  if (level === 1) colorClass = 'bg-green-950/40';
-                  if (level === 2) colorClass = 'bg-green-900/40 border border-green-900/10';
-                  if (level === 3) colorClass = 'bg-brand-green/40';
-                  if (level === 4) colorClass = 'bg-brand-green';
+                  if (level === 1) colorClass = 'bg-green-950/40 hover:bg-green-950/70';
+                  if (level === 2) colorClass = 'bg-green-900/40 border border-green-900/10 hover:bg-green-900/70';
+                  if (level === 3) colorClass = 'bg-brand-green/40 hover:bg-brand-green/70';
+                  if (level === 4) colorClass = 'bg-brand-green hover:bg-brand-green-light';
                   
+                  const isHovered = hoveredHeatmapIdx === idx;
+
                   return (
                     <div
                       key={idx}
-                      className={`aspect-square w-full rounded-[1px] transition-colors ${colorClass}`}
-                      title={`Verified activity scale: ${level}`}
+                      onMouseEnter={() => setHoveredHeatmapIdx(idx)}
+                      onMouseLeave={() => setHoveredHeatmapIdx(null)}
+                      className={`aspect-square w-full rounded-[1px] transition-all cursor-crosshair ${colorClass} ${isHovered ? 'scale-125 ring-1 ring-white/60 z-10' : ''}`}
                     />
                   );
                 })}
+              </div>
+
+              {/* Live Telemetry Overlay Readout */}
+              <div className="mt-3 bg-zinc-950/90 border border-white/5 p-2 rounded text-left font-mono text-[9px] min-h-[50px] flex flex-col justify-between">
+                {hoveredHeatmapIdx !== null ? (
+                  <>
+                    <div className="flex justify-between text-zinc-400">
+                      <span>CELL_ID: [LN_{hoveredHeatmapIdx}]</span>
+                      <span className="text-brand-green font-bold">STATUS: VERIFIED_RECORD</span>
+                    </div>
+                    <div className="flex justify-between items-baseline mt-1">
+                      <span className="text-white font-bold">
+                        {heatmapData[hoveredHeatmapIdx] === 0 ? '0 SUBMISSIONS' :
+                         heatmapData[hoveredHeatmapIdx] === 1 ? '1-2 SUBMISSIONS' :
+                         heatmapData[hoveredHeatmapIdx] === 2 ? '3-4 SUBMISSIONS' :
+                         heatmapData[hoveredHeatmapIdx] === 3 ? '5-7 SUBMISSIONS' :
+                         '8+ SUBMISSIONS (ELITE)'}
+                      </span>
+                      <span className="text-zinc-500 text-[8px]">VAL_HASH: 0x{((hoveredHeatmapIdx * 197) + 4096).toString(16).toUpperCase()}</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-zinc-500 flex flex-col justify-center items-center h-full text-center py-2">
+                    <span className="animate-pulse text-brand-purple">● STANDBY_TELEMETRY_LINK</span>
+                    <span className="text-[8px] text-zinc-600 mt-1">HOVER ANY NODAL CELL FOR LOG READOUT</span>
+                  </div>
+                )}
               </div>
 
               <div className="flex items-center justify-between mt-3 font-mono text-[8px] text-zinc-600">

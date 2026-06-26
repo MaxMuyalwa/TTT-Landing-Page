@@ -290,14 +290,19 @@ export default function FeaturedChallenges() {
                   <div
                     key={challenge.id}
                     onClick={() => setActiveChallengeIdx(idx)}
-                    className={`cursor-pointer rounded border p-4 flex flex-col justify-between transition-all h-[190px] text-left relative overflow-hidden ${
+                    className={`cursor-pointer rounded border p-4 flex flex-col justify-between transition-all h-[190px] text-left relative overflow-hidden group ${
                       isActive 
-                        ? 'bg-[#060608] border-brand-purple shadow-[0_0_15px_rgba(147,51,234,0.15)]' 
+                        ? 'bg-[#060608] border-brand-purple shadow-[0_0_15px_rgba(147,51,234,0.15)] scale-[1.01]' 
                         : 'bg-[#060608]/40 border-zinc-900 hover:border-zinc-800 hover:bg-[#060608]/85'
                     }`}
                   >
-                    {/* Tiny index tag */}
-                    <div className="absolute top-2 right-2 font-mono text-[8px] text-zinc-700">INDEX_0{idx + 1}</div>
+                    {/* Tiny index tag + Interactivity indicator */}
+                    <div className="absolute top-2 right-2 flex items-center gap-1.5 font-mono text-[8px]">
+                      <span className={`transition-all duration-300 ${isActive ? 'text-brand-purple font-bold' : 'text-zinc-600 group-hover:text-brand-green'}`}>
+                        {isActive ? 'ACTIVE_BLUEPRINT' : 'CLICK_TO_EXPLORE'}
+                      </span>
+                      <span className="text-zinc-700 font-bold">| INDEX_0{idx + 1}</span>
+                    </div>
 
                     <div className="flex flex-col gap-1.5">
                       <span className="font-mono text-[8px] text-zinc-500 uppercase">{challenge.difficulty} TIER</span>
@@ -305,13 +310,13 @@ export default function FeaturedChallenges() {
                     </div>
 
                     {/* Vector CAD preview inside each card */}
-                    <div className="h-20 w-full flex items-center justify-center bg-zinc-950/40 border border-zinc-900/20 rounded p-1 my-2">
+                    <div className="h-20 w-full flex items-center justify-center bg-zinc-950/40 border border-zinc-900/20 rounded p-1 my-2 transition-all duration-300 group-hover:bg-zinc-900/70">
                       {renderChallengeBlueprint(challenge.previewSvg)}
                     </div>
 
                     <div className="flex items-center justify-between border-t border-zinc-900/40 pt-2 mt-1">
                       <span className="font-mono text-[9px] text-zinc-500">{challenge.boundingBox}</span>
-                      <span className="font-mono text-[9px] text-brand-green font-bold">{challenge.avgTime} MINS</span>
+                      <span className="font-mono text-[9px] text-brand-green font-bold group-hover:scale-105 transition-transform">{challenge.avgTime} MINS</span>
                     </div>
                   </div>
                 );

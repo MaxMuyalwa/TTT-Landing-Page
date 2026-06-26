@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Target, ShieldCheck, Mail, Cpu, Sparkles, Check } from 'lucide-react';
+import { Target, ShieldCheck, Mail, Cpu, Check } from 'lucide-react';
 
 export default function FinalCta() {
   const [email, setEmail] = useState('');
@@ -24,10 +24,6 @@ export default function FinalCta() {
         <div className="absolute bottom-2 right-2 font-mono text-[8px] text-zinc-700">COORD: [FINAL_TRIGGER_STABLE]</div>
 
         <div className="max-w-2xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-1.5 rounded bg-brand-green/10 border border-brand-green/20 px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-brand-green">
-            <Sparkles className="h-3 w-3 animate-pulse" />
-            <span>NO_FEES // NO_CREDIT_CARD_REQUIRED</span>
-          </div>
 
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
             Join the Global Arena
