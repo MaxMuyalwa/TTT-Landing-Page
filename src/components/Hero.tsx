@@ -18,7 +18,7 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-25 md:opacity-40 transition-opacity duration-1000"
+          className="w-full h-full object-cover opacity-35 md:opacity-50 transition-opacity duration-1000"
         >
           {/* User's local custom background video path */}
           <source src="/videos/hero-video.mp4" type="video/mp4" />
@@ -56,7 +56,7 @@ export default function Hero() {
             Learn 3D card
           </h1>
           <p className="font-display font-extrabold tracking-tight uppercase text-zinc-400 text-lg sm:text-xl md:text-2xl">
-            one more at a time
+            One Model at a Time
           </p>
         </div>
 
