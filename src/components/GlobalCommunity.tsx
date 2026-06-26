@@ -19,7 +19,7 @@ export default function GlobalCommunity() {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <span className="h-1.5 w-6 bg-brand-purple rounded-full" />
-                <span className="font-mono text-xs text-brand-purple uppercase font-bold">// SECTION_04 // GLOBAL_COHORT</span>
+                
               </div>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 A Unified Global Ecosystem
@@ -219,3 +219,4 @@ export default function GlobalCommunity() {
     </section>
   );
 }
+

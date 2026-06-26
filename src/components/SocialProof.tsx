@@ -18,7 +18,7 @@ export default function SocialProof() {
         <div className="space-y-4 mb-12 text-center md:text-left">
           <div className="flex items-center gap-2 justify-center md:justify-start">
             <span className="h-1.5 w-6 bg-brand-green rounded-full" />
-            <span className="font-mono text-xs text-brand-green uppercase font-bold">// SECTION_09 // PARAMETRIC_HALL_OF_FAME</span>
+            
           </div>
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Community Milestones & Achievements
@@ -139,3 +139,4 @@ export default function SocialProof() {
     </section>
   );
 }
+

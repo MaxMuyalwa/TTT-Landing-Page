@@ -171,7 +171,7 @@ export default function FeaturedChallenges() {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-6 bg-brand-green rounded-full" />
-              <span className="font-mono text-xs text-brand-green uppercase font-bold">SECTION_06 // FEATURED_CAD_CHALLENGES</span>
+              
             </div>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Join the #1 Global CAD-Agnostic Community and Climb the Leaderboards
@@ -342,3 +342,4 @@ export default function FeaturedChallenges() {
     </section>
   );
 }
+

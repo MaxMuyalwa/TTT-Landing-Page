@@ -83,15 +83,7 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans font-black tracking-tighter uppercase text-white">
             The World's Best CAD Pros Practice Here
           </h1>
-          <p className="font-display font-extrabold tracking-tight uppercase text-zinc-400 text-lg sm:text-xl md:text-2xl">
-            Compete. Improve. Climb.
-          </p>
         </div>
-
-        {/* Subtitle description */}
-        <p className="mt-3 text-xs sm:text-sm text-white font-sans tracking-wide max-w-2xl mx-auto">
-          Practice real CAD challenges, verify your mass, and rank against a global community using the software you already know.
-        </p>
 
         {/* Centered Pill Buttons */}
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
@@ -132,7 +124,7 @@ export default function Hero() {
             <img 
               src="/images/practice-challenges.png" 
               alt="CAD Practice Modeling Platform" 
-              className={`w-full h-full object-cover select-none relative z-10 transition-all duration-500 group-hover:scale-[1.01] ${imageLoaded ? 'block' : 'hidden'}`}
+              className={`w-full h-full object-contain select-none relative z-10 transition-all duration-500 group-hover:scale-[1.01] ${imageLoaded ? 'block' : 'hidden'}`}
               referrerPolicy="no-referrer"
               onLoad={() => {
                 setImageLoaded(true);
@@ -162,4 +154,6 @@ export default function Hero() {
     </section>
   );
 }
+
+
 

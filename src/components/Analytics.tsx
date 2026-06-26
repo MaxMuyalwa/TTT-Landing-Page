@@ -45,7 +45,7 @@ export default function Analytics() {
         <div className="space-y-4 mb-12">
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-6 bg-brand-green rounded-full" />
-            <span className="font-mono text-xs text-brand-green uppercase font-bold">// SECTION_03 // CAD_ENGINEERING_ANALYTICS</span>
+            
           </div>
           <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Real Analytics. Real Performance.
@@ -447,3 +447,4 @@ export default function Analytics() {
     </section>
   );
 }
+

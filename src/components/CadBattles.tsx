@@ -29,7 +29,7 @@ export default function CadBattles() {
         <div className="space-y-4 mb-12 text-left">
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-6 bg-brand-green rounded-full" />
-            <span className="font-mono text-xs text-brand-green uppercase font-bold">// SECTION_08 // CAD_BATTLES_ESPORTS_HUB</span>
+            
           </div>
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Live Competitive CAD Arenas
@@ -207,3 +207,4 @@ export default function CadBattles() {
     </section>
   );
 }
+

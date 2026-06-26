@@ -7,14 +7,15 @@ export default function CadCompatibility() {
   const rail = [...cadPackages, ...cadPackages];
 
   return (
-    <section className="relative overflow-hidden bg-black/95 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 engineering-grid-fine opacity-30 pointer-events-none" />
+    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-black/45 to-black -mt-20 pt-28 pb-14 px-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 engineering-grid-fine opacity-20 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-transparent via-black/20 to-black/55 pointer-events-none" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-6 rounded-full bg-brand-purple" />
-              <span className="font-mono text-xs font-bold uppercase text-brand-purple-light">SECTION_01 // CAD_AGNOSTIC_STACK</span>
+              
             </div>
             <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
               Compatible with Any CAD Package
@@ -25,7 +26,7 @@ export default function CadCompatibility() {
           </p>
         </div>
 
-        <div className="relative overflow-hidden border-y border-white/10 bg-zinc-950/50 py-4">
+        <div className="relative overflow-hidden bg-black/20 py-4">
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
           <div className="flex w-max gap-3 animate-logo-marquee">
@@ -45,3 +46,5 @@ export default function CadCompatibility() {
     </section>
   );
 }
+
+

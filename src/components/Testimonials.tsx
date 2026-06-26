@@ -37,7 +37,7 @@ export default function Testimonials() {
           <div>
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-6 rounded-full bg-brand-purple" />
-              <span className="font-mono text-xs font-bold uppercase text-brand-purple-light">SECTION_11 // STRAPI_TESTIMONIAL_FEED</span>
+              
             </div>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Testimonials</h2>
           </div>

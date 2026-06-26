@@ -15,7 +15,7 @@ export default function HowItWorks() {
         <div className="mb-10 text-center">
           <div className="flex items-center justify-center gap-2">
             <span className="h-1.5 w-6 rounded-full bg-brand-green" />
-            <span className="font-mono text-xs font-bold uppercase text-brand-green">SECTION_03 // USER_ONBOARDING_FLOW</span>
+            
           </div>
           <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">How It Works</h2>
         </div>
