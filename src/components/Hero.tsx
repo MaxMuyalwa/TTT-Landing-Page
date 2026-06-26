@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronRight, Sparkles, Layers, ShieldCheck, Zap } from 'lucide-react';
 
 export default function Hero() {
@@ -7,6 +7,35 @@ export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  useEffect(() => {
+    const videoElement = document.getElementById('hero-background-video');
+    if (!videoElement) return;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const fadeRange = 500; // Scroll range in px to complete fade
+      const progress = Math.min(scrollY / fadeRange, 1);
+      
+      const isDesktop = window.innerWidth >= 768;
+      const baseOpacity = isDesktop ? 0.50 : 0.35;
+      const startOpacity = 0.70;
+      
+      const currentOpacity = startOpacity - progress * (startOpacity - baseOpacity);
+      videoElement.style.opacity = currentOpacity.toString();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    
+    // Initial calculation
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-transparent pt-4 pb-4 md:pt-6 md:pb-8 border-b border-white/10 min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] flex flex-col justify-center">
       
@@ -14,11 +43,13 @@ export default function Hero() {
       <div className="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {/* Background Video */}
         <video
+          id="hero-background-video"
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-35 md:opacity-50 transition-opacity duration-1000"
+          className="w-full h-full object-cover"
+          style={{ opacity: 0.70 }}
         >
           {/* User's local custom background video path */}
           <source src="/videos/hero-video.mp4" type="video/mp4" />
