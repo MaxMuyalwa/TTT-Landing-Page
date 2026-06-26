@@ -4,6 +4,8 @@ import { ArrowRight, ChevronRight, Sparkles, Layers, ShieldCheck, Zap } from 'lu
 export default function Hero() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [bgSrc, setBgSrc] = useState('/images/hero-bg.jpg');
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <section className="relative overflow-hidden bg-transparent pt-4 pb-4 md:pt-6 md:pb-8 border-b border-white/10 min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] flex flex-col justify-center">
@@ -90,69 +92,28 @@ export default function Hero() {
             {/* Real Image Element (Points to /images/practice-challenges.png) */}
             <img 
               src="/images/practice-challenges.png" 
-              alt="Too Tall Toby - CAD Practice Modeling Platform" 
-              className="w-full h-full object-cover select-none relative z-10 transition-all duration-500 group-hover:scale-[1.01]"
+              alt="CAD Practice Modeling Platform" 
+              className={`w-full h-full object-cover select-none relative z-10 transition-all duration-500 group-hover:scale-[1.01] ${imageLoaded ? 'block' : 'hidden'}`}
               referrerPolicy="no-referrer"
-              onError={(e) => {
-                // If user hasn't added the file yet, hide the broken icon & display our beautiful high-fidelity tech-mesh placeholder
-                e.currentTarget.style.display = 'none';
-                const f = document.getElementById('cad-image-placeholder-fallback');
-                if (f) f.classList.remove('hidden');
+              onLoad={() => {
+                setImageLoaded(true);
+                setImageError(false);
+              }}
+              onError={() => {
+                setImageLoaded(false);
+                setImageError(true);
               }}
             />
 
             {/* Premium, High-Fidelity Interactive Blueprint Placeholder Fallback (Visible before they upload to Github) */}
-            <div 
-              id="cad-image-placeholder-fallback" 
-              className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center overflow-hidden"
-            >
-              {/* Background Tech Grids & Neon Radiating Lights */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(147,51,234,0.12),transparent_70%)] pointer-events-none" />
-              <div className="absolute inset-0 engineering-grid opacity-15 pointer-events-none" />
-              
-              {/* Neon Reticle Corner Accents */}
-              <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-white/20" />
-              <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-white/20" />
-              <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-white/20" />
-              <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-white/20" />
-
-              {/* Central Technical Icon with Ambient Pulse */}
-              <div className="relative mb-2">
-                <div className="absolute inset-0 rounded-full bg-brand-purple/20 blur-xl animate-pulse" />
-                <div className="relative h-12 w-12 rounded-2xl bg-zinc-950/80 border border-brand-purple/40 flex items-center justify-center text-brand-purple shadow-[0_0_20px_rgba(147,51,234,0.3)]">
-                  <Layers className="h-6 w-6 animate-pulse" />
-                </div>
+            {!imageLoaded && (
+              <div 
+                id="cad-image-placeholder-fallback" 
+                className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+              >
+                {/* Clean, empty reserved space waiting for the image upload */}
               </div>
-
-              {/* Title & Status Block */}
-              <div className="max-w-xl space-y-2 z-10">
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-brand-purple/10 border border-brand-purple/20 px-2.5 py-0.5 font-mono text-[8px] uppercase tracking-widest text-brand-purple-light">
-                  <Sparkles className="h-2.5 w-2.5 animate-spin-slow" />
-                  <span>Interactive Map Image Placeholder</span>
-                </div>
-                
-                <h3 className="font-display text-base sm:text-lg md:text-xl font-black text-white uppercase tracking-tight">
-                  CAD Practice Challenges Platform Interface
-                </h3>
-                
-                <p className="text-[11px] text-zinc-400 font-sans max-w-md mx-auto leading-relaxed">
-                  This card keeps the original container lines, premium synthwave aesthetics, and size exactly as designed. 
-                  Below is the reserved filename to add in your GitHub repository:
-                </p>
-
-                {/* Technical Instruction Box */}
-                <div className="mt-2 inline-block bg-zinc-950/90 border border-zinc-800 rounded px-3 py-1.5 text-left font-mono text-[9px] sm:text-[10px]">
-                  <div className="flex items-center gap-2 text-zinc-500 mb-0.5">
-                    <span className="h-1.5 w-1.5 bg-brand-green rounded-full" />
-                    <span>RESERVED STATIC ASSET PATH</span>
-                  </div>
-                  <div className="text-white font-bold select-all bg-black/50 px-2 py-0.5 rounded border border-white/5">
-                    /public/images/practice-challenges.png
-                  </div>
-                  <div className="text-[7.5px] text-zinc-600 mt-0.5 uppercase tracking-wider">// Drop your dashboard image at this path to sync automatically</div>
-                </div>
-              </div>
-            </div>
+            )}
 
           </div>
 
