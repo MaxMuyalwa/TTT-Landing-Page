@@ -162,7 +162,7 @@ export default function Sponsors() {
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="max-h-32 max-w-32 object-contain"
+                    className={`object-contain ${partner.name === 'Onshape' ? 'max-h-40 max-w-40' : 'max-h-32 max-w-32'}`}
                     onError={handleImageError}
                   />
                 </div>
