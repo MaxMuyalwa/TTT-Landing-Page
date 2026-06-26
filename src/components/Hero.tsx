@@ -89,7 +89,7 @@ export default function Hero() {
         </div>
 
         {/* Subtitle description */}
-        <p className="mt-3 text-xs sm:text-sm text-zinc-400 font-sans tracking-wide max-w-2xl mx-auto">
+        <p className="mt-3 text-xs sm:text-sm text-white font-sans tracking-wide max-w-2xl mx-auto">
           Sharpen your CAD skills using any 3D CAD platform.
         </p>
 
