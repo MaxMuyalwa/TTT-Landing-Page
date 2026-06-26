@@ -156,13 +156,13 @@ export default function Sponsors() {
 
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_30px_90px_rgba(255,255,255,0.05)] backdrop-blur-xl">
             <h2 className="text-xl font-semibold text-white mb-6">Past Partners</h2>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5 items-center">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5 items-center justify-items-center">
               {pastPartners.map((partner) => (
-                <div key={partner.name} className="flex justify-center">
+                <div key={partner.name} className="h-32 w-32 flex items-center justify-center">
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="max-h-20 object-contain"
+                    className="max-h-32 max-w-32 object-contain"
                     onError={handleImageError}
                   />
                 </div>
