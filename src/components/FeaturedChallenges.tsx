@@ -174,11 +174,10 @@ export default function FeaturedChallenges() {
               <span className="font-mono text-xs text-brand-green uppercase font-bold">SECTION_06 // FEATURED_CAD_CHALLENGES</span>
             </div>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              CAD Practice Blueprint Index
+              Join the #1 Global CAD-Agnostic Community and Climb the Leaderboards
             </h2>
             <p className="font-sans text-sm text-zinc-400 max-w-2xl leading-relaxed">
-              Ditch hypothetical guides. Solve physical blueprints, measure mass distributions, 
-              and verify coordinates. Use any platform to model the physical geometric solids.
+              Pick a real drawing, model it in your preferred CAD package, submit the mass, and see where your run lands against active builders around the world.
             </p>
           </div>
           
@@ -216,6 +215,21 @@ export default function FeaturedChallenges() {
                 </span>
                 
                 <span className="font-mono text-[9px] text-zinc-600 font-bold uppercase">{selectedChallenge.category}</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                <div className="rounded border border-zinc-900 bg-black/50 p-2">
+                  <div className="font-mono text-[8px] text-zinc-500 uppercase">LIVE_BOARD</div>
+                  <div className="font-mono text-[10px] text-brand-green mt-1">#1 {selectedChallenge.avgTime}</div>
+                </div>
+                <div className="rounded border border-zinc-900 bg-black/50 p-2">
+                  <div className="font-mono text-[8px] text-zinc-500 uppercase">DIFFICULTY</div>
+                  <div className="font-mono text-[10px] text-white mt-1">{selectedChallenge.difficulty}</div>
+                </div>
+                <div className="rounded border border-zinc-900 bg-black/50 p-2">
+                  <div className="font-mono text-[8px] text-zinc-500 uppercase">ACTIVE_NOW</div>
+                  <div className="font-mono text-[10px] text-brand-purple-light mt-1">{Math.max(18, Math.round(selectedChallenge.completions / 420))}</div>
+                </div>
               </div>
 
               <div>
@@ -272,7 +286,7 @@ export default function FeaturedChallenges() {
             <div className="mt-8 pt-4 border-t border-zinc-900/60 flex flex-col sm:flex-row gap-2">
               <button className="flex-1 inline-flex items-center justify-center gap-2 rounded bg-brand-green py-2 px-4 font-mono text-xs font-bold uppercase text-black hover:bg-brand-green-light transition-all">
                 <Download className="h-3.5 w-3.5" />
-                <span>Get Blueprint PDF</span>
+                <span>Get Started</span>
               </button>
               <button className="inline-flex items-center justify-center gap-1 rounded border border-zinc-800 bg-zinc-900/30 py-2 px-4 font-mono text-xs text-zinc-400 hover:text-white hover:border-zinc-700 transition-all">
                 <span>View Rules</span>
@@ -315,8 +329,7 @@ export default function FeaturedChallenges() {
                     </div>
 
                     <div className="flex items-center justify-between border-t border-zinc-900/40 pt-2 mt-1">
-                      <span className="font-mono text-[9px] text-zinc-500">{challenge.boundingBox}</span>
-                      <span className="font-mono text-[9px] text-brand-green font-bold group-hover:scale-105 transition-transform">{challenge.avgTime} MINS</span>
+                      <span className="font-mono text-[9px] text-zinc-500">{challenge.completions.toLocaleString()} COMPLETIONS</span><span className="font-mono text-[9px] text-brand-green font-bold group-hover:scale-105 transition-transform">{Math.max(18, Math.round(challenge.completions / 420))} ACTIVE</span>
                     </div>
                   </div>
                 );

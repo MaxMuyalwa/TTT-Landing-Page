@@ -26,11 +26,10 @@ export default function FinalCta() {
         <div className="max-w-2xl mx-auto space-y-6">
 
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Join the Global Arena
+            Ready to Practice Like the Best?
           </h2>
           <p className="font-sans text-sm text-zinc-400 leading-relaxed">
-            Stop spectator training. Stop watching passive video courses. Secure your telemetry dashboard, 
-            download real geometric challenges, and practice modeling against global timers.
+            Start with a real drawing, submit your mass, and turn every practice run into measurable progress.
           </p>
 
           {!isSubmitted ? (
@@ -55,8 +54,17 @@ export default function FinalCta() {
                   type="submit"
                   className="px-5 py-3 border border-brand-green text-brand-green font-mono text-xs font-bold uppercase tracking-wider hover:bg-brand-green hover:text-black transition-all"
                 >
-                  Start Practicing
-                </button>
+                  Try as Guest
+                </button>              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <a href="#challenges" className="rounded border border-white/10 px-4 py-2 font-mono text-[10px] font-bold uppercase text-zinc-300 hover:border-brand-green hover:text-brand-green transition-all">
+                  Browse Challenges
+                </a>
+                <a href="https://www.tootalltoby.com/cswp-prep/" target="_blank" rel="noreferrer" className="rounded border border-brand-purple/40 bg-brand-purple/10 px-4 py-2 font-mono text-[10px] font-bold uppercase text-brand-purple-light hover:bg-brand-purple hover:text-white transition-all">
+                  CSWP Prep
+                </a>
+
               </div>
 
               {/* CAD System dropdown selector */}

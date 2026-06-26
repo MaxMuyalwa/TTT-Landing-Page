@@ -81,31 +81,37 @@ export default function Hero() {
         {/* Title Group - Centered exactly like upload */}
         <div className="space-y-1 max-w-3xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans font-black tracking-tighter uppercase text-white">
-            Learn 3D CAD
+            The World's Best CAD Pros Practice Here
           </h1>
           <p className="font-display font-extrabold tracking-tight uppercase text-zinc-400 text-lg sm:text-xl md:text-2xl">
-            One Model at a Time
+            Compete. Improve. Climb.
           </p>
         </div>
 
         {/* Subtitle description */}
         <p className="mt-3 text-xs sm:text-sm text-white font-sans tracking-wide max-w-2xl mx-auto">
-          Sharpen your CAD skills using any 3D CAD platform.
+          Practice real CAD challenges, verify your mass, and rank against a global community using the software you already know.
         </p>
 
         {/* Centered Pill Buttons */}
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
           <a
+            href="#register"
+            className="px-6 py-2 rounded-full bg-[#22c55e] text-black hover:bg-[#4ade80] transition-all font-sans text-[11px] font-bold uppercase tracking-wider shadow-[0_4px_12px_rgba(34,197,94,0.3)] flex items-center gap-2"
+          >
+            TRY AS GUEST
+          </a>
+          <a
             href="#challenges"
             className="px-6 py-2 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-all font-sans text-[11px] font-bold uppercase tracking-wider shadow-[0_4px_12px_rgba(255,255,255,0.15)] flex items-center gap-2"
           >
-            ACCESS FULL LIBRARY
+            BROWSE CHALLENGES
           </a>
           <a
-            href="#register"
-            className="px-6 py-2 rounded-full bg-[#22c55e] text-white hover:bg-[#1bb051] transition-all font-sans text-[11px] font-bold uppercase tracking-wider shadow-[0_4px_12px_rgba(34,197,94,0.3)] flex items-center gap-2"
+            href="#login"
+            className="px-4 py-2 rounded-full border border-white/10 bg-black/20 text-zinc-100 hover:text-white hover:border-white/40 transition-all font-sans text-[11px] font-bold uppercase tracking-wider flex items-center gap-2"
           >
-            TRY AS GUEST
+            I ALREADY HAVE AN ACCOUNT
           </a>
         </div>
 
@@ -156,3 +162,4 @@ export default function Hero() {
     </section>
   );
 }
+

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import CadCompatibility from './components/CadCompatibility';
 import Analytics from './components/Analytics';
 import GlobalCommunity from './components/GlobalCommunity';
 import PracticeImprovement from './components/PracticeImprovement';
 import FeaturedChallenges from './components/FeaturedChallenges';
+import HowItWorks from './components/HowItWorks';
 import Tutorials from './components/Tutorials';
 import CadBattles from './components/CadBattles';
+import Testimonials from './components/Testimonials';
 import SocialProof from './components/SocialProof';
 import FinalCta from './components/FinalCta';
 import Privacy from './components/Privacy';
@@ -54,8 +57,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans antialiased overflow-x-hidden">
-      
-      {/* 1. Technical Responsive Navigation Header */}
       <Navbar />
 
       <main>
@@ -69,39 +70,23 @@ export default function App() {
           <Sponsors />
         ) : (
           <>
-            {/* 2. Hero: Global CAD practice ecosystem & Holographic interactive SVG globe */}
             <Hero />
-
-            {/* 4. Engineering Analytics: Donut charts, improvement curve node plotting & consistency heatmap */}
-            <Analytics />
-
-            {/* 5. Global Community Representation: Abstracted vector coordinate map hotspot explorer */}
-            <GlobalCommunity />
-
-            {/* 6. Practice & Mastery Simulator: CAD speed run projection slider widget */}
-            <PracticeImprovement />
-
-            {/* 7. Practice Blueprints Index: Interactive challenges carousel featuring dimensioned wireframes */}
+            <CadCompatibility />
             <FeaturedChallenges />
-
-            {/* 8. Knowledge Node Network: Connected nonlinear tutorials graph with system filters */}
+            <HowItWorks />
+            <Analytics />
+            <GlobalCommunity />
+            <PracticeImprovement />
             <Tutorials />
-
-            {/* 9. CAD Battles esports arena: Playoff bracket tree, ticking count downs & millisecondTiming tables */}
             <CadBattles />
-
-            {/* 10. Social Proof: The Parametric Hall of Fame grid (Speed, Consistency, Volumetric output) */}
+            <Testimonials />
             <SocialProof />
-
-            {/* 11. Final Call-to-Action: Interactive registration workspace console */}
             <FinalCta />
           </>
         )}
       </main>
 
-      {/* 12. Fine Engineering Detail Blueprint Footer */}
       <Footer />
-      
     </div>
   );
 }

@@ -99,3 +99,11 @@
   animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-logo-marquee {
+  animation: logoMarquee 28s linear infinite;
+}
