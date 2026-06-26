@@ -18,9 +18,7 @@ export default function Hero() {
       
       const isDesktop = window.innerWidth >= 768;
       const baseOpacity = isDesktop ? 0.50 : 0.35;
-      const startOpacity = 0.70;
-      
-      const currentOpacity = startOpacity - progress * (startOpacity - baseOpacity);
+      const currentOpacity = 1 - progress * (1 - baseOpacity);
       videoElement.style.opacity = currentOpacity.toString();
     };
 
@@ -49,7 +47,7 @@ export default function Hero() {
           muted
           playsInline
           className="w-full h-full object-cover"
-          style={{ opacity: 0.70 }}
+          style={{ opacity: 1 }}
         >
           {/* User's local custom background video path */}
           <source src="/videos/hero-video.mp4" type="video/mp4" />
