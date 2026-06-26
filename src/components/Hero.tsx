@@ -87,7 +87,12 @@ export default function Hero() {
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
           
           {/* Practice Challenges Interactive Space (Image Slot) */}
-          <div className="relative w-full aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:h-[42vh] lg:max-h-[380px] min-h-[240px] bg-black/40 rounded-xl border border-white/5 flex items-center justify-center overflow-hidden group">
+          <a
+            href="https://www.youtube.com/watch?v=ZqquT1gi724"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative w-full aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:h-[42vh] lg:max-h-[380px] min-h-[240px] bg-black/40 rounded-xl border border-white/5 flex items-center justify-center overflow-hidden group block cursor-pointer"
+          >
             
             {/* Real Image Element (Points to /images/practice-challenges.png) */}
             <img 
@@ -115,7 +120,7 @@ export default function Hero() {
               </div>
             )}
 
-          </div>
+          </a>
 
         </div>
 
