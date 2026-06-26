@@ -35,9 +35,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-transparent pt-4 pb-4 md:pt-6 md:pb-8 border-b border-white/10 min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] flex flex-col justify-center">
+    <section className="relative overflow-visible bg-transparent pt-4 pb-4 md:pt-6 md:pb-8 min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] flex flex-col justify-center">
       
-      {/* Above-the-fold Full Background Video with Bottom Fade to Solid Black */}
+      {/* Smooth gradient divider to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-black/20 to-black/80 pointer-events-none z-20" />
+
       <div className="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {/* Background Video */}
         <video
