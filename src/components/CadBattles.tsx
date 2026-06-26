@@ -20,7 +20,7 @@ export default function CadBattles() {
   }, []);
 
   return (
-    <section id="battles" className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8 border-b border-white/20">
+    <section id="battles" className="relative overflow-hidden bg-gradient-to-b from-black via-black/80 to-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">

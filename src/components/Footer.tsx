@@ -7,7 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-12 px-4 sm:px-6 lg:px-8 border-t border-white/20">
+    <footer className="relative overflow-hidden bg-gradient-to-b from-black/40 via-black/20 to-black backdrop-blur-[2px] py-12 px-4 sm:px-6 lg:px-8">
       {/* Blueprint background grid accent */}
       <div className="absolute inset-0 dot-grid opacity-5 pointer-events-none" />
       

@@ -35,7 +35,7 @@ export default function Analytics() {
   };
 
   return (
-    <section id="analytics" className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8 border-b border-white/20">
+    <section id="analytics" className="relative overflow-hidden bg-gradient-to-b from-transparent via-black/20 to-black py-16 px-4 sm:px-6 lg:px-8 border-b border-white/20">
       {/* Fine high-tech grid */}
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       

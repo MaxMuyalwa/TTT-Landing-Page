@@ -161,7 +161,7 @@ export default function FeaturedChallenges() {
   };
 
   return (
-    <section id="challenges" className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8 border-b border-zinc-900">
+    <section id="challenges" className="relative overflow-hidden bg-gradient-to-b from-black via-black/80 to-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">

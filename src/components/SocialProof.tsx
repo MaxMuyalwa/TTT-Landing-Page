@@ -9,7 +9,7 @@ export default function SocialProof() {
   const volumeKings = [...LEADERBOARD_DATA].sort((a, b) => b.challengesCompleted - a.challengesCompleted).slice(0, 3);
 
   return (
-    <section className="relative overflow-hidden bg-black/40 backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8 border-b border-white/20">
+    <section className="relative overflow-hidden bg-gradient-to-b from-black/40 via-black/20 to-black backdrop-blur-[2px] py-16 px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 dot-grid opacity-15 pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">
