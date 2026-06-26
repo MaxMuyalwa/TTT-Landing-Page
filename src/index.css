@@ -11,6 +11,7 @@
   --color-brand-green: #22c55e;
   --color-brand-green-light: #4ade80;
   --color-dark-bg: #09090b;
+  --color-black: #0a0a0a;
 }
 
 /* Engineering and blueprint styles */
@@ -81,11 +82,20 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade-in-quick {
   animation: fadeInQuick 0.12s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 

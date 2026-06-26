@@ -97,7 +97,7 @@ export default function Analytics() {
                     );
                   })}
                   {/* Central cutout for donut hole */}
-                  <circle cx="0" cy="0" r="0.65" fill="#000000" />
+                  <circle cx="0" cy="0" r="0.65" fill="#0a0a0a" />
                 </svg>
                 
                 {/* Center text overlay */}

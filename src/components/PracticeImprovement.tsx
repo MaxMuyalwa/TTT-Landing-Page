@@ -139,7 +139,7 @@ export default function PracticeImprovement() {
                       <line x1={xCoord} y1="20" x2={xCoord} y2="180" stroke="#18181b" strokeWidth="1" strokeDasharray="2 2" />
                       
                       {/* Plot node circles */}
-                      <circle cx={xCoord} cy={yCoord} r="5" fill="#9333ea" stroke="#000000" strokeWidth="1.5" />
+                      <circle cx={xCoord} cy={yCoord} r="5" fill="#9333ea" stroke="#0a0a0a" strokeWidth="1.5" />
                       
                       {/* Label values above dot */}
                       <text x={xCoord} y={yCoord - 10} className="font-mono text-[9px] fill-brand-green font-bold text-center" textAnchor="middle">

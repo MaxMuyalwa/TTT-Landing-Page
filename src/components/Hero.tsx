@@ -81,7 +81,7 @@ export default function Hero() {
         {/* Title Group - Centered exactly like upload */}
         <div className="space-y-1 max-w-3xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans font-black tracking-tighter uppercase text-white">
-            Learn 3D card
+            Learn 3D CAD
           </h1>
           <p className="font-display font-extrabold tracking-tight uppercase text-zinc-400 text-lg sm:text-xl md:text-2xl">
             One Model at a Time
@@ -90,7 +90,7 @@ export default function Hero() {
 
         {/* Subtitle description */}
         <p className="mt-3 text-xs sm:text-sm text-zinc-400 font-sans tracking-wide max-w-2xl mx-auto">
-          Sharpen your card skills using any 3D card platform.
+          Sharpen your CAD skills using any 3D CAD platform.
         </p>
 
         {/* Centered Pill Buttons */}

@@ -20,6 +20,7 @@ interface DropdownItem {
   name: string;
   href: string;
   desc: string;
+  icon?: React.ReactNode;
 }
 
 interface NavItem {
@@ -40,7 +41,8 @@ export default function Navbar() {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
   // Contact form state
-  const [contactName, setContactName] = useState('');
+  const [contactFirstName, setContactFirstName] = useState('');
+  const [contactLastName, setContactLastName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactMessage, setContactMessage] = useState('');
   const [contactSuccess, setContactSuccess] = useState(false);
@@ -54,38 +56,39 @@ export default function Navbar() {
   const navItems: NavItem[] = [
     {
       label: 'Play & Learn',
-      href: '#challenges',
+      href: '/#challenges',
       dropdownItems: [
-        { name: 'Practice Simulator', href: '#challenges', desc: 'Realtime CAD speed simulator' },
-        { name: 'Featured Challenges', href: '#challenges', desc: 'Dimensioned orthographic blueprints' },
-        { name: 'Speedrun Telemetry', href: '#analytics', desc: 'Performance benchmarks & plots' },
+        { name: 'Practice Simulator', href: '/#challenges', desc: 'Realtime CAD speed simulator' },
+        { name: 'Featured Challenges', href: '/#challenges', desc: 'Dimensioned orthographic blueprints' },
+        { name: 'Speedrun Telemetry', href: '/#analytics', desc: 'Performance benchmarks & plots' },
       ]
     },
     {
       label: 'Tournaments',
-      href: '#battles',
+      href: '/#battles',
       dropdownItems: [
-        { name: 'Live Esports Arena', href: '#battles', desc: 'Watch CAD masters battle head-to-head' },
-        { name: 'Global Speed Rankings', href: '#battles', desc: 'Top CAD speedrun leaderboards' },
-        { name: 'Register for Showdowns', href: '#register', desc: 'Join the next bracket and win prizes' },
+        { name: 'Live Esports Arena', href: '/#battles', desc: 'Watch CAD masters battle head-to-head' },
+        { name: 'Global Speed Rankings', href: '/#battles', desc: 'Top CAD speedrun leaderboards' },
+        { name: 'Register for Showdowns', href: '/#register', desc: 'Join the next bracket and win prizes' },
       ]
     },
     {
       label: 'Resources',
-      href: '#tutorials',
+      href: '/#tutorials',
       dropdownItems: [
-        { name: 'Knowledge Node Network', href: '#tutorials', desc: 'Nonlinear educational CAD graph' },
-        { name: 'CAD-Agnostic Tutorials', href: '#tutorials', desc: 'Learn SolidWorks, Fusion 360, Onshape' },
-        { name: 'Community Telemetry', href: '#analytics', desc: 'System statistics & diagnostic instrumentation' },
+        { name: 'Knowledge Node Network', href: '/#tutorials', desc: 'Nonlinear educational CAD graph' },
+        { name: 'CAD-Agnostic Tutorials', href: '/#tutorials', desc: 'Learn SolidWorks, Fusion 360, Onshape' },
+        { name: 'Community Telemetry', href: '/#analytics', desc: 'System statistics & diagnostic instrumentation' },
       ]
     },
     {
       label: 'About Us',
-      href: '#analytics',
+      href: '/#analytics',
       dropdownItems: [
-        { name: 'Who is Too Tall Toby?', href: '#register', desc: 'The global CAD competition creator' },
-        { name: 'Global Cohorts & Hubs', href: '#register', desc: 'Active countries and community maps' },
-        { name: 'Contact Engineering', href: '#register', desc: 'Submit bugs or suggest blueprints' },
+        { name: 'Media', href: '/media', desc: 'Press kits, event reels, and coverage highlights' },
+        { name: 'Sponsors', href: '/sponsors', desc: 'Partnered brands powering global CAD tournaments' },
+        { name: 'Testimonials', href: 'https://www.trustpilot.com/review/tootalltoby.com', desc: 'What past teams and winners say about us' },
+        { name: 'Merch', href: '/#merch', desc: 'Limited edition gear for CAD competitors' },
       ]
     }
   ];
@@ -116,12 +119,13 @@ export default function Navbar() {
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (contactName && contactEmail && contactMessage) {
+    if (contactFirstName && contactLastName && contactEmail && contactMessage) {
       setContactSuccess(true);
       setTimeout(() => {
         setIsContactOpen(false);
         setContactSuccess(false);
-        setContactName('');
+        setContactFirstName('');
+        setContactLastName('');
         setContactEmail('');
         setContactMessage('');
       }, 1800);
@@ -136,11 +140,12 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {!logoError ? (
             <a 
-              href="#" 
+              href="/" 
               onClick={(e) => {
                 e.preventDefault();
+                window.history.pushState(null, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                window.history.pushState(null, '', ' ');
               }}
               className="flex items-center gap-3 group"
             >
@@ -153,11 +158,12 @@ export default function Navbar() {
             </a>
           ) : (
             <a 
-              href="#" 
+              href="/" 
               onClick={(e) => {
                 e.preventDefault();
+                window.history.pushState(null, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                window.history.pushState(null, '', ' ');
               }}
               className="flex items-center gap-3 group"
             >
@@ -165,7 +171,7 @@ export default function Navbar() {
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-[0_0_12px_rgba(255,255,255,0.45)] group-hover:scale-105 transition-transform duration-250">
                 <svg viewBox="0 0 100 100" className="h-full w-full">
                   {/* Outer circle with border */}
-                  <circle cx="50" cy="50" r="47" fill="#f5f7ff" stroke="#000000" strokeWidth="4"/>
+                  <circle cx="50" cy="50" r="47" fill="#f5f7ff" stroke="#0a0a0a" strokeWidth="4"/>
                   
                   {/* Light lavender/blue grid background inside the circle */}
                   <g mask="url(#circle-mask-inline)">
@@ -177,22 +183,22 @@ export default function Navbar() {
                     <path d="M 0,10 L 100,10 M 0,20 L 100,20 M 0,30 L 100,30 M 0,40 L 100,40 M 0,50 L 100,50 M 0,60 L 100,60 M 0,70 L 100,70 M 0,80 L 100,80 M 0,90 L 100,90" stroke="#d5deff" strokeWidth="1.25" />
                     
                     {/* Cartoon face/outline contour (Toby's head outline) */}
-                    <path d="M 22,50 C 20,24 80,24 78,50 C 76,73 24,73 22,50" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round"/>
+                    <path d="M 22,50 C 20,24 80,24 78,50 C 76,73 24,73 22,50" fill="none" stroke="#0a0a0a" strokeWidth="3" strokeLinecap="round"/>
                     
                     {/* Spectacles glasses (Thick black rims, rounded square design) */}
-                    <rect x="28" y="38" width="18" height="18" rx="4" fill="none" stroke="#000000" strokeWidth="4.5" strokeLinejoin="round" />
-                    <rect x="54" y="38" width="18" height="18" rx="4" fill="none" stroke="#000000" strokeWidth="4.5" strokeLinejoin="round" />
+                    <rect x="28" y="38" width="18" height="18" rx="4" fill="none" stroke="#0a0a0a" strokeWidth="4.5" strokeLinejoin="round" />
+                    <rect x="54" y="38" width="18" height="18" rx="4" fill="none" stroke="#0a0a0a" strokeWidth="4.5" strokeLinejoin="round" />
                     
                     {/* Spectacles Bridge */}
-                    <path d="M 46,47 Q 50,44 54,47" fill="none" stroke="#000000" strokeWidth="4.5" strokeLinecap="round"/>
+                    <path d="M 46,47 Q 50,44 54,47" fill="none" stroke="#0a0a0a" strokeWidth="4.5" strokeLinecap="round"/>
                     
                     {/* Spectacles Temples/Arms (extending outwards) */}
-                    <path d="M 28,47 C 22,45 18,38 16,44" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" />
-                    <path d="M 72,47 C 78,45 82,38 84,44" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                    <path d="M 28,47 C 22,45 18,38 16,44" fill="none" stroke="#0a0a0a" strokeWidth="3" strokeLinecap="round" />
+                    <path d="M 72,47 C 78,45 82,38 84,44" fill="none" stroke="#0a0a0a" strokeWidth="3" strokeLinecap="round" />
                     
                     {/* Little hand-drawn details (Toby hair tuft/ear markings) */}
-                    <path d="M 18,52 L 15,58" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" />
-                    <path d="M 82,52 L 85,58" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 18,52 L 15,58" fill="none" stroke="#0a0a0a" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 82,52 L 85,58" fill="none" stroke="#0a0a0a" strokeWidth="2.5" strokeLinecap="round" />
                   </g>
                 </svg>
               </div>
@@ -238,6 +244,8 @@ export default function Navbar() {
                         <a
                           key={subItem.name}
                           href={subItem.href}
+                          target={subItem.href.startsWith('http') ? '_blank' : undefined}
+                          rel={subItem.href.startsWith('http') ? 'noreferrer noopener' : undefined}
                           onClick={() => setActiveDropdown(null)}
                           className="block p-2 rounded hover:bg-zinc-900 transition-colors group/sub"
                         >
@@ -278,7 +286,7 @@ export default function Navbar() {
 
           {/* Register Button: Rich dark purple container with neon purple border */}
           <a 
-            href="#register" 
+            href="/#register" 
             className="px-4 py-1.5 bg-[#14072b] hover:bg-[#200c42] border border-purple-600 rounded-md text-white font-sans text-xs font-semibold tracking-wide transition-all shadow-[0_0_15px_rgba(147,51,234,0.2)] hover:shadow-[0_0_20px_rgba(147,51,234,0.45)]"
           >
             Register
@@ -341,7 +349,7 @@ export default function Navbar() {
               Login
             </button>
             <a
-              href="#register"
+              href="/#register"
               onClick={() => setIsOpen(false)}
               className="w-full text-center py-2.5 bg-purple-900 border border-purple-500 rounded text-white text-xs font-bold shadow-lg"
             >
@@ -423,83 +431,103 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* -------------------- CONTACT TOBY MODAL -------------------- */}
+      {/* -------------------- CONTACT TOBY DROPDOWN -------------------- */}
       {isContactOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsContactOpen(false)} />
-          
-          <div className="relative w-full max-w-md bg-black border border-white/20 rounded-lg p-6 shadow-2xl overflow-hidden animate-fade-in">
-            {/* Tech line accents */}
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-green via-brand-purple to-brand-green" />
-            <div className="absolute bottom-2 left-2 font-mono text-[8px] text-zinc-700 select-none">SYS: TOBY_INBOX_ONLINE</div>
-            
-            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6">
-              <div className="flex items-center gap-2">
-                <Mail className="h-4.5 w-4.5 text-brand-green" />
-                <span className="font-mono text-xs text-white font-bold uppercase tracking-widest">// Contact Toby Schnaars</span>
+        <div className="fixed inset-0 z-[100] overflow-hidden">
+          <div className="absolute inset-0 bg-black/55 backdrop-blur-sm" onClick={() => setIsContactOpen(false)} />
+
+          <div className="fixed inset-x-0 top-16 z-[101] flex justify-center px-4">
+            <div className="w-full max-w-3xl max-h-[calc(100vh-4rem)] overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl animate-fade-in">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-green via-brand-purple to-brand-green" />
+              <div className="absolute bottom-3 left-6 font-mono text-[8px] text-zinc-700 select-none">SYS: TOBY_INBOX_ONLINE</div>
+
+              <div className="relative px-6 py-6 overflow-y-auto">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Mail className="h-4.5 w-4.5 text-brand-green" />
+                    <span className="font-mono text-xs text-white font-bold uppercase tracking-widest">// Contact Toby Schnaars</span>
+                  </div>
+                  <button 
+                    onClick={() => setIsContactOpen(false)} 
+                    className="text-zinc-400 hover:text-white transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+
+                {contactSuccess ? (
+                  <div className="py-8 text-center space-y-4">
+                    <div className="h-12 w-12 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto">
+                      <Check className="h-6 w-6 animate-pulse" />
+                    </div>
+                    <h3 className="font-display font-bold text-white text-base">Transmission Sent</h3>
+                    <p className="font-mono text-[10px] text-zinc-500">Toby and the engineering crew will respond shortly.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleContactSubmit} className="space-y-4 text-left pb-6">
+                    <div className="space-y-1.5">
+                      <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Email Address</label>
+                      <input 
+                        type="email" 
+                        required
+                        placeholder="name@company.com"
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-1.5">
+                        <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">First Name</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="First Name"
+                          value={contactFirstName}
+                          onChange={(e) => setContactFirstName(e.target.value)}
+                          className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Last Name</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="Last Name"
+                          value={contactLastName}
+                          onChange={(e) => setContactLastName(e.target.value)}
+                          className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Message</label>
+                      <textarea 
+                        required
+                        rows={5}
+                        placeholder="Suggest a challenge, report a speedrun score, or inquire about custom team tournaments..."
+                        value={contactMessage}
+                        onChange={(e) => setContactMessage(e.target.value)}
+                        className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors resize-none"
+                      />
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      className="w-full py-2.5 mt-2 bg-[#092b15] hover:bg-[#0e4221] border border-green-600 hover:border-green-500 rounded text-white font-mono text-xs font-bold uppercase tracking-widest transition-all"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                )}
               </div>
-              <button 
-                onClick={() => setIsContactOpen(false)} 
-                className="text-zinc-400 hover:text-white transition-colors"
-              >
-                <X className="h-4 w-4" />
-              </button>
+
+              <div className="border-t border-white/10 px-6 py-4 text-xs text-zinc-400">
+                By clicking submit, your message will be sent to the TooTallToby team!
+              </div>
             </div>
-
-            {contactSuccess ? (
-              <div className="py-8 text-center space-y-4">
-                <div className="h-12 w-12 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto">
-                  <Check className="h-6 w-6 animate-pulse" />
-                </div>
-                <h3 className="font-display font-bold text-white text-base">Transmission Sent</h3>
-                <p className="font-mono text-[10px] text-zinc-500">Toby and the engineering crew will respond shortly.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleContactSubmit} className="space-y-4 text-left">
-                <div className="space-y-1.5">
-                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Your Name</label>
-                  <input 
-                    type="text" 
-                    required
-                    placeholder="Engineer Name"
-                    value={contactName}
-                    onChange={(e) => setContactName(e.target.value)}
-                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Email Address</label>
-                  <input 
-                    type="email" 
-                    required
-                    placeholder="name@company.com"
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Transmission Details</label>
-                  <textarea 
-                    required
-                    rows={4}
-                    placeholder="Suggest a challenge, report a speedrun score, or inquire about custom team tournaments..."
-                    value={contactMessage}
-                    onChange={(e) => setContactMessage(e.target.value)}
-                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-green rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors resize-none"
-                  />
-                </div>
-
-                <button 
-                  type="submit" 
-                  className="w-full py-2.5 mt-2 bg-[#092b15] hover:bg-[#0e4221] border border-green-600 hover:border-green-500 rounded text-white font-mono text-xs font-bold uppercase tracking-widest transition-all"
-                >
-                  Send_Transmission
-                </button>
-              </form>
-            )}
           </div>
         </div>
       )}
