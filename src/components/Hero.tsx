@@ -111,7 +111,7 @@ export default function Hero() {
         </div>
 
         {/* Practice Modeling Container exactly styled as the centered box in the image */}
-        <div className="mt-6 mx-auto max-w-6xl w-full bg-zinc-950/90 border border-white/10 rounded-2xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md relative overflow-hidden">
+        <div className="mt-6 mx-auto max-w-6xl w-full bg-zinc-950/70 border border-white/10 rounded-2xl p-2 sm:p-3 shadow-[0_20px_40px_rgba(0,0,0,0.65)] backdrop-blur-md relative overflow-hidden">
           {/* Subtle top edge glow */}
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
           
@@ -120,7 +120,7 @@ export default function Hero() {
             href="https://www.youtube.com/watch?v=ZqquT1gi724"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative w-full aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:h-[42vh] lg:max-h-[380px] min-h-[240px] bg-black/40 rounded-xl border border-white/5 flex items-center justify-center overflow-hidden group block cursor-pointer"
+            className="relative w-full aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:h-[45vh] lg:max-h-[420px] min-h-[280px] bg-transparent rounded-[1.5rem] border border-white/10 flex items-center justify-center overflow-hidden group block cursor-pointer"
           >
             
             {/* Real Image Element (Points to /images/practice-challenges.png) */}
