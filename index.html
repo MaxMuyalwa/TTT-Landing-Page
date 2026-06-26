@@ -5,10 +5,486 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>TTT by Max</title>
+    <style>
+      :root {
+        --bg-dark: #0a0a0a;
+        --color-purple: #9333ea;
+        --color-green: #22c55e;
+        --progress-duration: 56s;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      #loader-screen {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: var(--bg-dark);
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+      }
+
+      #loader-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loader {
+        position: relative;
+        width: 190px;
+        height: 218px;
+        perspective: 880px;
+        isolation: isolate;
+      }
+
+      .track {
+        position: absolute;
+        inset: auto 8px 54px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(147, 51, 234, 0.55),
+          transparent
+        );
+        opacity: 0.8;
+        z-index: -2;
+      }
+
+      .track-reflect {
+        position: absolute;
+        inset: auto 14px 58px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(34, 197, 94, 0.45),
+          transparent
+        );
+        opacity: 0.35;
+        z-index: -2;
+      }
+
+      .cube {
+        position: absolute;
+        left: 50%;
+        bottom: 64px;
+        width: 72px;
+        height: 72px;
+        margin-left: -36px;
+        transform-style: preserve-3d;
+        transform: translateY(0px) rotateX(-8deg) rotateY(8deg) rotateZ(0deg);
+        animation: roll-right 1.4s infinite cubic-bezier(0.58, 0.08, 0.45, 0.93);
+        will-change: transform;
+      }
+
+      .face {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(147, 51, 234, 0.3);
+        backface-visibility: hidden;
+        overflow: hidden;
+      }
+
+      .face::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(147, 51, 234, 0.08) 1px, transparent 1px);
+        background-size: 6px 6px;
+        opacity: 0.16;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+      }
+
+      .face::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          130deg,
+          rgba(34, 197, 94, 0.15),
+          transparent 45%
+        );
+        opacity: 0.25;
+        pointer-events: none;
+      }
+
+      .front {
+        transform: translateZ(36px);
+        background: linear-gradient(
+          145deg,
+          #1a1a1a 0%,
+          #2d2d3d 42%,
+          #1f1f2e 100%
+        );
+        box-shadow:
+          inset 0 0 0 1px rgba(147, 51, 234, 0.3),
+          inset 0 10px 16px rgba(34, 197, 94, 0.15),
+          inset 0 -10px 14px rgba(0, 0, 0, 0.5);
+      }
+
+      .right {
+        transform: rotateY(90deg) translateZ(36px);
+        background: linear-gradient(160deg, #2a2a3a, #1a1a2e 74%);
+        border: 1px solid rgba(147, 51, 234, 0.2);
+      }
+
+      .top {
+        transform: rotateX(90deg) translateZ(36px);
+        background: linear-gradient(160deg, #3a3a4a, #2a2a3a 68%);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+      }
+
+      .shadow {
+        position: absolute;
+        left: 50%;
+        margin-left: -48px;
+        bottom: 48px;
+        width: 96px;
+        height: 12px;
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(147, 51, 234, 0.3),
+          rgba(147, 51, 234, 0.05) 72%
+        );
+        filter: blur(0.8px);
+        animation: shadow-sync 1.4s infinite
+          cubic-bezier(0.58, 0.08, 0.45, 0.93);
+        z-index: -1;
+      }
+
+      .contact-shadow {
+        position: absolute;
+        left: 50%;
+        margin-left: -31px;
+        bottom: 53px;
+        width: 62px;
+        height: 6px;
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(34, 197, 94, 0.4),
+          rgba(34, 197, 94, 0.08) 72%
+        );
+        filter: blur(0.4px);
+        animation: contact-sync 1.4s infinite
+          cubic-bezier(0.58, 0.08, 0.45, 0.93);
+        z-index: -1;
+      }
+
+      .spec {
+        position: absolute;
+        width: 78px;
+        height: 78px;
+        border-radius: 14px;
+        border: 1px solid rgba(147, 51, 234, 0.2);
+        transform: rotate(45deg);
+        opacity: 0.22;
+        animation: spec-pulse 1.4s infinite cubic-bezier(0.58, 0.08, 0.45, 0.93);
+        z-index: -3;
+      }
+
+      .progress-wrap {
+        position: absolute;
+        left: 50%;
+        bottom: 14px;
+        transform: translateX(-50%);
+        width: 168px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .progress-label {
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: rgba(147, 51, 234, 0.7);
+        text-transform: uppercase;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .progress-rail {
+        display: block;
+        width: 118px;
+        height: 4px;
+        border-radius: 999px;
+        border: 1px solid rgba(147, 51, 234, 0.3);
+        background: rgba(147, 51, 234, 0.1);
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        display: block;
+        height: 100%;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          rgba(147, 51, 234, 0.8),
+          rgba(34, 197, 94, 0.8)
+        );
+        transition: width 280ms ease;
+      }
+
+      .progress-fill::after {
+        content: "";
+        display: block;
+        height: 160%;
+        width: 34%;
+        margin-left: auto;
+        transform: translateY(-20%);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(34, 197, 94, 0.4),
+          transparent
+        );
+        animation: progress-scan 1.4s infinite linear;
+      }
+
+      .progress-num {
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        color: rgba(34, 197, 94, 0.8);
+        min-width: 28px;
+        text-align: center;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      @keyframes roll-right {
+        0% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg) rotateZ(0deg);
+        }
+        11% {
+          transform: translateY(-14px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(46deg);
+        }
+        22% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg) rotateZ(92deg);
+        }
+        28% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg) rotateZ(90deg);
+        }
+        37.5% {
+          transform: translateY(-14px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(136deg);
+        }
+        47% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(182deg);
+        }
+        53% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(180deg);
+        }
+        62.5% {
+          transform: translateY(-14px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(226deg);
+        }
+        72% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(272deg);
+        }
+        78% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(270deg);
+        }
+        87.5% {
+          transform: translateY(-14px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(316deg);
+        }
+        97% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(362deg);
+        }
+        100% {
+          transform: translateY(0px) rotateX(-8deg) rotateY(8deg)
+            rotateZ(360deg);
+        }
+      }
+
+      @keyframes shadow-sync {
+        0%,
+        22%,
+        28%,
+        47%,
+        53%,
+        72%,
+        78%,
+        97%,
+        100% {
+          transform: scaleX(0.9);
+          opacity: 0.5;
+        }
+        11%,
+        37.5%,
+        62.5%,
+        87.5% {
+          transform: scaleX(0.78);
+          opacity: 0.34;
+        }
+      }
+
+      @keyframes contact-sync {
+        0%,
+        22%,
+        28%,
+        47%,
+        53%,
+        72%,
+        78%,
+        97%,
+        100% {
+          transform: scaleX(0.98);
+          opacity: 0.6;
+        }
+        11%,
+        37.5%,
+        62.5%,
+        87.5% {
+          transform: scaleX(0.74);
+          opacity: 0.24;
+        }
+      }
+
+      @keyframes spec-pulse {
+        0%,
+        100% {
+          opacity: 0.14;
+          transform: rotate(45deg) scale(0.96);
+        }
+        25%,
+        50%,
+        75% {
+          opacity: 0.26;
+          transform: rotate(45deg) scale(1.01);
+        }
+      }
+
+      @keyframes progress-scan {
+        from {
+          transform: translate(-165%, -20%);
+        }
+        to {
+          transform: translate(165%, -20%);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .loader {
+          transform: scale(0.88);
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="loader-screen">
+      <div class="loader" aria-label="Loading screen">
+        <span class="track" aria-hidden="true"></span>
+        <span class="track-reflect" aria-hidden="true"></span>
+        <span class="shadow" aria-hidden="true"></span>
+        <span class="contact-shadow" aria-hidden="true"></span>
+        <span class="spec" aria-hidden="true"></span>
+
+        <div class="cube" aria-hidden="true">
+          <span class="face front"></span>
+          <span class="face right"></span>
+          <span class="face top"></span>
+        </div>
+
+        <div class="progress-wrap" aria-hidden="true">
+          <span class="progress-label">Loading</span>
+          <span class="progress-rail"
+            ><span class="progress-fill" id="progress-fill"></span
+          ></span>
+          <span class="progress-num" id="progress-num">0%</span>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const fill = document.getElementById("progress-fill");
+      const num = document.getElementById("progress-num");
+      const loaderScreen = document.getElementById("loader-screen");
+
+      const LOADING_DURATION_MS = 3000; // 3 seconds
+      const FAST_TARGET = 80;
+      const FAST_DURATION_MS = 2000;
+      const SLOW_STEP_MS = 500;
+
+      let value = 0;
+      let rafId = null;
+      let slowTimer = null;
+
+      const render = (v) => {
+        const clamped = Math.max(0, Math.min(100, v));
+        fill.style.width = clamped + "%";
+        num.textContent = clamped + "%";
+      };
+
+      const clearTimers = () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        if (slowTimer) clearInterval(slowTimer);
+        rafId = null;
+        slowTimer = null;
+      };
+
+      const hideLoader = () => {
+        clearTimers();
+        render(100);
+        loaderScreen.classList.add("hidden");
+      };
+
+      const startSlowPhase = () => {
+        slowTimer = setInterval(() => {
+          value += 1;
+          render(value);
+          if (value >= 100) {
+            clearInterval(slowTimer);
+            slowTimer = null;
+          }
+        }, SLOW_STEP_MS);
+      };
+
+      const startFastPhase = () => {
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / FAST_DURATION_MS);
+          value = Math.floor(t * FAST_TARGET);
+          render(value);
+          if (t < 1) {
+            rafId = requestAnimationFrame(tick);
+          } else {
+            value = FAST_TARGET;
+            render(value);
+            startSlowPhase();
+          }
+        };
+        rafId = requestAnimationFrame(tick);
+      };
+
+      function startCycle() {
+        clearTimers();
+        value = 0;
+        render(value);
+        startFastPhase();
+      }
+
+      startCycle();
+
+      // Hide loader after 3 seconds
+      setTimeout(hideLoader, LOADING_DURATION_MS);
+    </script>
   </body>
 </html>
 
