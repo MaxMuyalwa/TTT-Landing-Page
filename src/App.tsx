@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Metrics from './components/Metrics';
 import Analytics from './components/Analytics';
 import GlobalCommunity from './components/GlobalCommunity';
 import PracticeImprovement from './components/PracticeImprovement';
@@ -47,8 +46,6 @@ export default function App() {
         {/* 2. Hero: Global CAD practice ecosystem & Holographic interactive SVG globe */}
         <Hero />
 
-        {/* 3. Community Metrics: Animated instrument-style dials & sparkline telemetry */}
-        <Metrics />
 
         {/* 4. Engineering Analytics: Donut charts, improvement curve node plotting & consistency heatmap */}
         <Analytics />
