@@ -83,8 +83,8 @@ export default function Footer() {
             </div>
           </div>
  
-          {/* Column 2: Legal and documentation (3 cols) */}
-          <div className="md:col-span-3 text-left space-y-3">
+          {/* Column 2: Legal and documentation (4 cols) */}
+          <div className="md:col-span-4 text-left space-y-3">
             <h4 className="font-mono text-[10px] uppercase font-bold text-zinc-400">ENGINEERING_RESOURCES</h4>
             <ul className="space-y-1.5 font-sans text-xs text-zinc-500">
               <li>
@@ -111,8 +111,8 @@ export default function Footer() {
             </ul>
           </div>
  
-          {/* Column 3: Platform specs (3 cols) */}
-          <div className="md:col-span-3 text-left space-y-3">
+          {/* Column 3: Platform specs (4 cols) */}
+          <div className="md:col-span-4 text-left space-y-3">
             <h4 className="font-mono text-[10px] uppercase font-bold text-zinc-400">LEGAL_METRIC</h4>
             <ul className="space-y-1.5 font-sans text-xs text-zinc-500">
               <li>
@@ -136,25 +136,6 @@ export default function Footer() {
                 </span>
               </li>
             </ul>
-          </div>
- 
-          {/* Column 4: Status / connection diagnostic (2 cols) */}
-          <div className="md:col-span-2 text-left space-y-3">
-            <h4 className="font-mono text-[10px] uppercase font-bold text-zinc-400">DIAGNOSTICS</h4>
-            <div className="bg-black border border-white/10 rounded p-2.5 space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[8px] text-zinc-500">PING</span>
-                <span className="font-mono text-[9px] text-brand-green font-bold">14ms_OK</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[8px] text-zinc-500">NODE_COMP</span>
-                <span className="font-mono text-[9px] text-brand-purple font-bold">100%_AG</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[8px] text-zinc-500">DB_CONN</span>
-                <span className="font-mono text-[9px] text-brand-green font-bold">SECURE_PASS</span>
-              </div>
-            </div>
           </div>
 
         </div>
