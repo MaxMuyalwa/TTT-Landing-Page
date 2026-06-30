@@ -8,8 +8,13 @@ export default function CadCompatibility() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-black/45 to-black -mt-20 pt-28 pb-14 px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 engineering-grid-fine opacity-20 pointer-events-none" />
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-transparent via-black/20 to-black/55 pointer-events-none" />
+      <div 
+        className="absolute inset-0 engineering-grid-fine opacity-20 pointer-events-none" 
+        style={{
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 80px)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 80px)'
+        }}
+      />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
