@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cpu } from 'lucide-react';
 
 const cadPackages = ['SOLIDWORKS', 'Fusion 360', 'Onshape', 'FreeCAD', 'Creo', 'Inventor', 'CATIA', 'NX', 'Solid Edge'];
 
@@ -36,8 +35,7 @@ export default function CadCompatibility() {
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
           <div className="flex w-max gap-3 animate-logo-marquee">
             {rail.map((name, index) => (
-              <div key={`${name}-${index}`} className="flex min-w-[150px] items-center justify-center gap-2 rounded border border-zinc-800 bg-black px-4 py-3">
-                <Cpu className="h-4 w-4 text-brand-green" />
+              <div key={`${name}-${index}`} className="flex min-w-[150px] items-center justify-center rounded border border-zinc-800 bg-black px-4 py-3">
                 <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-300">{name}</span>
               </div>
             ))}
