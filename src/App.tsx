@@ -59,7 +59,7 @@ export default function App() {
     <div className="min-h-screen bg-black text-white font-sans antialiased overflow-x-hidden">
       <Navbar />
 
-      <main>
+      <main className="pt-16">
         {route === '/privacy' ? (
           <Privacy />
         ) : route === '/eula' ? (

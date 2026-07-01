@@ -16,17 +16,26 @@ export default function Footer() {
           
           {/* Column 1: Info and logo (4 cols) */}
           <div className="md:col-span-4 space-y-4 text-left">
-            <div className="flex items-center gap-3">
+            <a 
+              href="/" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.history.pushState(null, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="flex items-center gap-3 group cursor-pointer inline-flex"
+            >
               {!logoError ? (
                 <img 
                   src={logoSrc} 
                   onError={() => setLogoError(true)} 
                   alt="Too Tall Toby Logo" 
-                  className="h-8 md:h-10 w-auto object-contain" 
+                  className="h-8 md:h-10 w-auto object-contain transition-transform duration-250 group-hover:scale-102" 
                 />
               ) : (
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-[0_0_12px_rgba(255,255,255,0.45)]">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-[0_0_12px_rgba(255,255,255,0.45)] group-hover:scale-105 transition-transform duration-250">
                     <svg viewBox="0 0 100 100" className="h-full w-full">
                       {/* Outer circle with border */}
                       <circle cx="50" cy="50" r="47" fill="#f5f7ff" stroke="#0a0a0a" strokeWidth="4"/>
@@ -61,7 +70,7 @@ export default function Footer() {
                     </svg>
                   </div>
                   <div>
-                    <span className="font-sans font-black tracking-tighter text-white text-base uppercase leading-tight block">
+                    <span className="font-sans font-black tracking-tighter text-white text-base uppercase leading-tight block transition-colors duration-200 group-hover:text-zinc-200">
                       TOO TALL TOBY
                     </span>
                     <div className="font-mono text-[8px] tracking-widest text-brand-green uppercase leading-none">
@@ -70,7 +79,7 @@ export default function Footer() {
                   </div>
                 </div>
               )}
-            </div>
+            </a>
             
             <p className="font-sans text-xs text-zinc-500 leading-relaxed max-w-xs">
               The premier platform for professional speedrun modeling tournaments, practice exercises, 
