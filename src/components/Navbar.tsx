@@ -104,6 +104,14 @@ export default function Navbar() {
     }, 150);
   };
 
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('/') && !href.startsWith('/#')) {
+      e.preventDefault();
+      window.history.pushState(null, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (loginEmail) {
@@ -246,7 +254,10 @@ export default function Navbar() {
                           href={subItem.href}
                           target={subItem.href.startsWith('http') ? '_blank' : undefined}
                           rel={subItem.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-                          onClick={() => setActiveDropdown(null)}
+                          onClick={(e) => {
+                            setActiveDropdown(null);
+                            handleNavigation(e, subItem.href);
+                          }}
                           className="block p-2 rounded hover:bg-zinc-900 transition-colors group/sub"
                         >
                           <div className="font-sans text-xs font-semibold text-white group-hover/sub:text-brand-purple flex items-center justify-between">
@@ -318,7 +329,10 @@ export default function Navbar() {
                     <a
                       key={subItem.name}
                       href={subItem.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => {
+                        setIsOpen(false);
+                        handleNavigation(e, subItem.href);
+                      }}
                       className="block p-2 rounded text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors text-xs font-medium"
                     >
                       {subItem.name}

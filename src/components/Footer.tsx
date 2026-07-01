@@ -6,6 +6,14 @@ export default function Footer() {
   const [logoError, setLogoError] = useState(false);
   const currentYear = new Date().getFullYear();
 
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('/') && !href.startsWith('/#')) {
+      e.preventDefault();
+      window.history.pushState(null, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-black/40 via-black/20 to-black backdrop-blur-[2px] py-12 px-4 sm:px-6 lg:px-8">
       {/* Blueprint background grid accent */}
@@ -125,12 +133,20 @@ export default function Footer() {
             <h4 className="font-mono text-[10px] uppercase font-bold text-zinc-400">LEGAL_METRIC</h4>
             <ul className="space-y-1.5 font-sans text-xs text-zinc-500">
               <li>
-                <a href="/eula" className="hover:text-zinc-300 transition-colors">
+                <a 
+                  href="/eula" 
+                  onClick={(e) => handleNavigation(e, '/eula')}
+                  className="hover:text-zinc-300 transition-colors"
+                >
                   EULA
                 </a>
               </li>
               <li>
-                <a href="/privacy" className="hover:text-zinc-300 transition-colors">
+                <a 
+                  href="/privacy" 
+                  onClick={(e) => handleNavigation(e, '/privacy')}
+                  className="hover:text-zinc-300 transition-colors"
+                >
                   Privacy Policy
                 </a>
               </li>
