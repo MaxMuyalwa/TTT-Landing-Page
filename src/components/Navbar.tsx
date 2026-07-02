@@ -378,17 +378,16 @@ export default function Navbar() {
       {/* -------------------- LOGIN MODAL -------------------- */}
       {isLoginOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsLoginOpen(false)} />
+          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={() => setIsLoginOpen(false)} />
           
-          <div className="relative w-full max-w-md bg-black border border-white/20 rounded-lg p-6 shadow-2xl overflow-hidden animate-fade-in">
+          <div className="relative w-full max-w-md bg-zinc-950 border border-white/10 rounded-xl p-6 shadow-2xl overflow-hidden animate-fade-in">
             {/* Tech line accents */}
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-purple via-brand-green to-brand-purple" />
-            <div className="absolute bottom-2 left-2 font-mono text-[8px] text-zinc-700 select-none">SYS: CAD_GATEWAY_V1.0</div>
             
             <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6">
               <div className="flex items-center gap-2">
-                <LogIn className="h-4.5 w-4.5 text-brand-purple" />
-                <span className="font-mono text-xs text-white font-bold uppercase tracking-widest">// User Authentication</span>
+                <LogIn className="h-4 w-4 text-brand-purple" />
+                <span className="font-sans text-sm text-white font-bold">Log In</span>
               </div>
               <button 
                 onClick={() => setIsLoginOpen(false)} 
@@ -403,13 +402,13 @@ export default function Navbar() {
                 <div className="h-12 w-12 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto">
                   <Check className="h-6 w-6 animate-pulse" />
                 </div>
-                <h3 className="font-display font-bold text-white text-base">Authentication Successful</h3>
-                <p className="font-mono text-[10px] text-zinc-500">Redirecting to CAD telemetry dashboard...</p>
+                <h3 className="font-sans font-bold text-white text-base">Login Successful</h3>
+                <p className="font-sans text-xs text-zinc-400">Redirecting to your dashboard...</p>
               </div>
             ) : (
               <form onSubmit={handleLoginSubmit} className="space-y-4 text-left">
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Engineering Email</label>
+                  <label className="font-sans text-xs font-semibold text-zinc-300 block">Email Address</label>
                   <div className="relative">
                     <User className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
                     <input 
@@ -418,28 +417,28 @@ export default function Navbar() {
                       placeholder="name@company.com"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
-                      className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-purple rounded px-3 py-2 pl-9 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                      className="w-full bg-black/60 border border-white/10 focus:border-brand-purple rounded-lg px-3 py-2 pl-9 font-sans text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider block">Security Keycode</label>
+                  <label className="font-sans text-xs font-semibold text-zinc-300 block">Password</label>
                   <input 
                     type="password" 
                     required
                     placeholder="••••••••"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full bg-zinc-950/60 border border-white/10 focus:border-brand-purple rounded px-3 py-2 font-mono text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
+                    className="w-full bg-black/60 border border-white/10 focus:border-brand-purple rounded-lg px-3 py-2 font-sans text-xs text-white placeholder-zinc-600 focus:outline-none transition-colors"
                   />
                 </div>
 
                 <button 
                   type="submit" 
-                  className="w-full py-2.5 mt-2 bg-[#14072b] hover:bg-[#200c42] border border-purple-600 hover:border-purple-500 rounded text-white font-mono text-xs font-bold uppercase tracking-widest transition-all"
+                  className="w-full py-2.5 mt-2 bg-brand-purple hover:bg-brand-purple-light rounded-lg text-white font-sans text-xs font-bold transition-all shadow-[0_0_12px_rgba(147,51,234,0.15)]"
                 >
-                  Authorize_Session
+                  Log In
                 </button>
               </form>
             )}
