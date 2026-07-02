@@ -414,6 +414,7 @@ export default function Navbar() {
                     <input 
                       type="email" 
                       required
+                      autoComplete="off"
                       placeholder="name@company.com"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
@@ -427,6 +428,7 @@ export default function Navbar() {
                   <input 
                     type="password" 
                     required
+                    autoComplete="new-password"
                     placeholder="••••••••"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
