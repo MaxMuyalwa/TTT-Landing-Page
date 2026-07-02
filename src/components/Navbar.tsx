@@ -231,6 +231,10 @@ export default function Navbar() {
               >
                 <a 
                   href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveDropdown(activeDropdown === idx ? null : idx);
+                  }}
                   className={`flex items-center gap-1 font-sans text-[13px] font-medium transition-colors cursor-pointer ${
                     isDropdownActive ? 'text-white' : 'text-zinc-300 hover:text-white'
                   }`}
