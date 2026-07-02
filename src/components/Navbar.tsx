@@ -76,9 +76,11 @@ export default function Navbar() {
       label: 'Resources',
       href: '/#tutorials',
       dropdownItems: [
-        { name: 'Knowledge Node Network', href: '/#tutorials', desc: 'Nonlinear educational CAD graph' },
-        { name: 'CAD-Agnostic Tutorials', href: '/#tutorials', desc: 'Learn SolidWorks, Fusion 360, Onshape' },
-        { name: 'Community Telemetry', href: '/#analytics', desc: 'System statistics & diagnostic instrumentation' },
+        { name: "Toby's Pro Tips", href: '/#tutorials', desc: 'Expert advice and speedrun modeling techniques' },
+        { name: 'Training ↗️', href: 'https://www.tootalltoby.com/', desc: 'Official instruction classes and CSWP preparation' },
+        { name: 'Discord ↗️', href: 'https://discord.com', desc: 'Join the community chat and share model files' },
+        { name: 'Calendar', href: '/#battles', desc: 'Upcoming tournament schedules and live broadcast dates' },
+        { name: 'Materials FAQ', href: '/#tutorials', desc: 'Frequently asked questions about CAD model properties' },
       ]
     },
     {
