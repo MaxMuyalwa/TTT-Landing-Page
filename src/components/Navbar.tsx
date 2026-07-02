@@ -76,11 +76,11 @@ export default function Navbar() {
       label: 'Resources',
       href: '/#tutorials',
       dropdownItems: [
-        { name: "Toby's Pro Tips", href: '/#tutorials', desc: 'Expert advice and speedrun modeling techniques' },
-        { name: 'Training ↗️', href: 'https://www.tootalltoby.com/', desc: 'Official instruction classes and CSWP preparation' },
-        { name: 'Discord ↗️', href: 'https://discord.com', desc: 'Join the community chat and share model files' },
-        { name: 'Calendar', href: '/#battles', desc: 'Upcoming tournament schedules and live broadcast dates' },
-        { name: 'Materials FAQ', href: '/#tutorials', desc: 'Frequently asked questions about CAD model properties' },
+        { name: "Toby's Pro Tips", href: '#', desc: 'Expert advice and speedrun modeling techniques' },
+        { name: 'Training ↗️', href: '#', desc: 'Official instruction classes and CSWP preparation' },
+        { name: 'Discord ↗️', href: '#', desc: 'Join the community chat and share model files' },
+        { name: 'Calendar', href: '#', desc: 'Upcoming tournament schedules and live broadcast dates' },
+        { name: 'Materials FAQ', href: '#', desc: 'Frequently asked questions about CAD model properties' },
       ]
     },
     {
@@ -262,6 +262,9 @@ export default function Navbar() {
                           target={subItem.href.startsWith('http') ? '_blank' : undefined}
                           rel={subItem.href.startsWith('http') ? 'noreferrer noopener' : undefined}
                           onClick={(e) => {
+                            if (subItem.href === '#') {
+                              e.preventDefault();
+                            }
                             setActiveDropdown(null);
                             handleNavigation(e, subItem.href);
                           }}
@@ -337,6 +340,9 @@ export default function Navbar() {
                       key={subItem.name}
                       href={subItem.href}
                       onClick={(e) => {
+                        if (subItem.href === '#') {
+                          e.preventDefault();
+                        }
                         setIsOpen(false);
                         handleNavigation(e, subItem.href);
                       }}
