@@ -141,8 +141,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-black/85 backdrop-blur-md">
-      <div className="flex w-full h-16 items-center justify-between px-6 lg:px-10">
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-black/85 backdrop-blur-md">
+        <div className="flex w-full h-16 items-center justify-between px-6 lg:px-10">
         
         {/* Left: Beautiful authentic Logo */}
         <div className="flex items-center gap-3">
@@ -372,6 +373,7 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      </header>
 
       {/* -------------------- LOGIN MODAL -------------------- */}
       {isLoginOpen && (
@@ -445,17 +447,16 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* -------------------- CONTACT TOBY DROPDOWN -------------------- */}
+      {/* -------------------- CONTACT TOBY MODAL -------------------- */}
       {isContactOpen && (
-        <div className="fixed inset-0 z-[100] overflow-hidden">
-          <div className="absolute inset-0 bg-black/55 backdrop-blur-sm" onClick={() => setIsContactOpen(false)} />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={() => setIsContactOpen(false)} />
 
-          <div className="fixed inset-x-0 top-16 z-[101] flex justify-center px-4">
-            <div className="w-full max-w-3xl max-h-[calc(100vh-4rem)] overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl animate-fade-in">
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-green via-brand-purple to-brand-green" />
-              <div className="absolute bottom-3 left-6 font-mono text-[8px] text-zinc-700 select-none">SYS: TOBY_INBOX_ONLINE</div>
+          <div className="relative w-full max-w-2xl max-h-[calc(100vh-4rem)] overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-[0_30px_90px_rgba(0,0,0,0.55)] flex flex-col animate-fade-in">
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-brand-green via-brand-purple to-brand-green" />
+            <div className="absolute bottom-3 left-6 font-mono text-[8px] text-zinc-700 select-none">SYS: TOBY_INBOX_ONLINE</div>
 
-              <div className="relative px-6 py-6 overflow-y-auto">
+              <div className="relative px-6 py-6 overflow-y-auto flex-1">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6">
                   <div className="flex items-center gap-2">
                     <Mail className="h-4.5 w-4.5 text-brand-green" />
@@ -543,8 +544,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </div>
       )}
-    </header>
+    </>
   );
 }
